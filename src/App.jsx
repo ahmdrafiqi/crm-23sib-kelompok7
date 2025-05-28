@@ -7,7 +7,9 @@ import { Routes, Route } from 'react-router-dom'
 import MainLayout from './components/MainLayout'
 import Dashboard from './pages/Dashboard'
 import Penjualan from './pages/Penjualan'
-
+import Pelanggan from './pages/Pelanggan'
+import Masuk from './pages/Masuk'
+import Daftar from './pages/Daftar'
 
 function App() {
 
@@ -16,6 +18,9 @@ function App() {
       <Route element={<MainLayout />}>
         <Route path='/' element={ <Dashboard />} />
         <Route path='/penjualan' element={ <Penjualan />} />
+        <Route path='/pelanggan' element={ <Pelanggan/>} />
+        <Route path='/masuk' element={ <Masuk/>} />
+        <Route path='/daftar' element={ <Daftar/>} />
       </Route>
     </Routes>
   )
