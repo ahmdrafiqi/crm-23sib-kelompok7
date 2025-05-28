@@ -8,6 +8,7 @@ import MainLayout from "./components/MainLayout";
 import Dashboard from "./pages/Dashboard";
 import Penjualan from "./pages/Penjualan";
 import Pelanggan from "./pages/Pelanggan";
+import Promo from "./pages/SystemPromo"
 
 
 
@@ -19,6 +20,7 @@ function App() {
         <Route path="/" element={<Dashboard />} />
         <Route path="/pelanggan" element={<Pelanggan />} />
         <Route path="/penjualan" element={<Penjualan />} />
+        <Route path="/promo" element={<Promo />} />
       </Route>
     </Routes>
   );
