@@ -4,15 +4,7 @@ import viteLogo from "/vite.svg";
 // import { Route } from 'lucide-react'
 // import './App.css'
 import { Routes, Route } from "react-router-dom";
-import MainLayout from "./components/MainLayout";
-import Dashboard from "./pages/Dashboard";
-import Penjualan from "./pages/Penjualan";
-import Pelanggan from "./pages/Pelanggan";
 import Promo from "./pages/SystemPromo"
-
-
-
-import { Routes, Route } from 'react-router-dom'
 import MainLayout from './components/MainLayout'
 import Dashboard from './pages/Dashboard'
 import Penjualan from './pages/Penjualan'
@@ -28,9 +20,6 @@ function App() {
         <Route path="/pelanggan" element={<Pelanggan />} />
         <Route path="/penjualan" element={<Penjualan />} />
         <Route path="/promo" element={<Promo />} />
-        <Route path='/' element={ <Dashboard />} />
-        <Route path='/penjualan' element={ <Penjualan />} />
-        <Route path='/pelanggan' element={ <Pelanggan/>} />
         <Route path='/masuk' element={ <Masuk/>} />
         <Route path='/daftar' element={ <Daftar/>} />
       </Route>
