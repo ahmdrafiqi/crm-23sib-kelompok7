@@ -8,15 +8,20 @@ import {
   User,
   LogIn,
   UserPlus,
+  BoxesIcon,
+  ListOrdered,
+  LucideFileQuestion,
 } from 'lucide-react'
 import { Link, useLocation } from 'react-router-dom'
 
 const menuItems = [
   { name: 'Dashboard', icon: <LayoutDashboard />, path: '/' },
-  // { name: 'Produk', icon: <Box />, path: '/produl' },
+  { name: 'Produk', icon: <Box />, path: '/produk' },
+  { name: 'Pesanan', icon: <ListOrdered />, path: '/pesanan' },
+  { name: 'FAQ', icon: <LucideFileQuestion />, path: '/faq' },
   // { name: 'Laporan', icon: <BarChart2 />, path: '/laporan' },
-  { name: 'Pelanggan', icon: <Box />, path: '/pelanggan' },
-  { name: 'Penjualan', icon: <BarChart2 />, path: '/penjualan' },
+  // { name: 'Pelanggan', icon: <Box />, path: '/pelanggan' },
+  // { name: 'Penjualan', icon: <BarChart2 />, path: '/penjualan' },
 ]
 
 const accountItems = [
