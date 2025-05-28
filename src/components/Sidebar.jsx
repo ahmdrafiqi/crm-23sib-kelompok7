@@ -20,13 +20,13 @@ const menuItems = [
   // { name: 'Laporan', icon: <BarChart2 />, path: '/laporan' },
   { name: 'Pelanggan', icon: <UserPlus />, path: '/pelanggan' },
   { name: 'Penjualan', icon: <ShoppingCart />, path: '/penjualan' },
-  { name: 'System Promo', icon: <MdDiscount />, path: '/promo' }
+  { name: 'System Promo', icon: <MdDiscount />, path: '/promo' },
 ]
 
 const accountItems = [
   { name: 'Pengaturan Akun', icon: <Settings />, path: '/akun' },
-  { name: 'Sign In', icon: <LogIn />, path: '/signin' },
-  { name: 'Sign Up', icon: <UserPlus />, path: '/signup' },
+  { name: 'Masuk', icon: <LogIn />, path: '/masuk' },
+  { name: 'Daftar', icon: <UserPlus />, path: '/daftar' },
 ]
 
 const Sidebar = () => {
