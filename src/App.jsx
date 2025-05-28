@@ -11,6 +11,9 @@ import Penjualan from './pages/Penjualan'
 import Pelanggan from './pages/Pelanggan'
 import Masuk from './pages/Masuk'
 import Daftar from './pages/Daftar'
+import Produk from './pages/Produk'
+import CekPesanan from './pages/Pesanan'
+import FAQ from './pages/FAQ'
 
 function App() {
   return (
@@ -22,6 +25,10 @@ function App() {
         <Route path="/promo" element={<Promo />} />
         <Route path='/masuk' element={ <Masuk/>} />
         <Route path='/daftar' element={ <Daftar/>} />
+        <Route path='/' element={ <Dashboard />} />
+        <Route path='/produk' element={ <Produk/>} />
+        <Route path='/pesanan' element={ <CekPesanan/>} />
+        <Route path='/faq' element={ <FAQ/>} />
       </Route>
     </Routes>
   );
