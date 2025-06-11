@@ -4,17 +4,18 @@ import viteLogo from "/vite.svg";
 // import { Route } from 'lucide-react'
 // import './App.css'
 import { Routes, Route } from "react-router-dom";
-import Promo from "./pages/SystemPromo";
-import MainLayout from "./components/MainLayout";
-import Dashboard from "./pages/Dashboard";
-import Penjualan from "./pages/Penjualan";
-import Pelanggan from "./pages/Pelanggan";
-import Masuk from "./pages/Masuk";
-import Daftar from "./pages/Daftar";
-import Produk from "./pages/Produk";
-import CekPesanan from "./pages/Pesanan";
-import FAQ from "./pages/FAQ";
 
+import Promo from "./pages/SystemPromo"
+import MainLayout from './components/MainLayout'
+import Dashboard from './pages/Dashboard'
+import Penjualan from './pages/Penjualan'
+import Pelanggan from './pages/Pelanggan'
+import Masuk from './pages/Masuk'
+import Daftar from './pages/Daftar'
+import Produk from './pages/Produk'
+import CekPesanan from './pages/Pesanan'
+import FAQ from './pages/FAQ'
+import HomePage from "./pages/HalamanUser/Homepage";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
         <Route path="/pesanan" element={<CekPesanan />} />
         <Route path="/faq" element={<FAQ />} />
       </Route>
+      <Route path='/home' element={ <HomePage/>} />
     </Routes>
   );
 }
