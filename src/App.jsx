@@ -14,6 +14,7 @@ import Daftar from './pages/Daftar'
 import Produk from './pages/Produk'
 import CekPesanan from './pages/Pesanan'
 import FAQ from './pages/FAQ'
+import ProfileUser from './pages/HalamanUser/ProfileUser'
 
 function App() {
   return (
@@ -30,6 +31,8 @@ function App() {
         <Route path='/pesanan' element={ <CekPesanan/>} />
         <Route path='/faq' element={ <FAQ/>} />
       </Route>
+
+      <Route path='/profil' element={ <ProfileUser/>} />
     </Routes>
   );
 }
