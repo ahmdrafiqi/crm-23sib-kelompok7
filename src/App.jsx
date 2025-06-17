@@ -18,6 +18,11 @@ import FAQ from './pages/FAQ'
 import ProfileUser from './pages/HalamanUser/ProfileUser'
 import HomePage from "./pages/HalamanUser/Homepage";
 import Member from "./pages/HalamanUser/Member";
+import ProdukPage from './pages/HalamanUser/ProdukPage'
+import RiwayatPage from './pages/HalamanUser/RiwayatPage';
+import CartPage from "./pages/HalamanUser/CartPage";
+import CheckoutPage from "./pages/HalamanUser/CheckoutPage";
+import ProfilePage from "./pages/HalamanUser/ProfilePage";
 
 function App() {
   return (
@@ -35,9 +40,14 @@ function App() {
         <Route path="/faq" element={<FAQ />} />
       </Route>
 
-      <Route path='/profil' element={ <ProfileUser/>} />
+      {/* <Route path='/profil' element={ <ProfileUser/>} /> */}
       <Route path='/home' element={ <HomePage/>} />
       <Route path='/member' element={ <Member/>} />
+      <Route path="/product" element={<ProdukPage />} />
+      <Route path="/riwayat" element={<RiwayatPage />} />
+      <Route path="/cart" element={<CartPage />} />
+      <Route path="/checkout" element={<CheckoutPage />} />
+      <Route path="/profil" element={<ProfilePage />} />
     </Routes>
   );
 }
