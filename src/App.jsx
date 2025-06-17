@@ -17,6 +17,7 @@ import CekPesanan from './pages/Pesanan'
 import FAQ from './pages/FAQ'
 import ProfileUser from './pages/HalamanUser/ProfileUser'
 import HomePage from "./pages/HalamanUser/Homepage";
+import Member from "./pages/HalamanUser/Member";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
 
       <Route path='/profil' element={ <ProfileUser/>} />
       <Route path='/home' element={ <HomePage/>} />
+      <Route path='/member' element={ <Member/>} />
     </Routes>
   );
 }

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Pencil, User, Heart, ShoppingBag, LogOut } from 'lucide-react';
 import CoverImage from '../../assets/assetsUser/Gambar.png';
 import ProfilePic from '../../assets/assetsUser/Profil.jpg';
+import UserLayout from '../../components/HalamanUser/UserLayout';
 
 const ProfileUser = () => {
   const [activeTab, setActiveTab] = useState('account');
@@ -14,14 +15,11 @@ const ProfileUser = () => {
   ];
 
   return (
+    <UserLayout>
     <div className="bg-white text-gray-800">
       {/* Header */}
       <header className="bg-white shadow-md p-4 flex justify-between items-center">
         <h1 className="text-xl font-semibold">miss glam</h1>
-        <div className="flex items-center gap-4 text-sm text-gray-600">
-          <span>Cart</span>
-          <span>Sign In</span>
-        </div>
       </header>
 
       {/* Cover */}
@@ -144,43 +142,8 @@ const ProfileUser = () => {
           </div>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="bg-white border-t mt-8 py-8">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-6 text-sm text-gray-600">
-          <div>
-            <h4 className="font-bold text-gray-800 mb-2">miss glam</h4>
-            <p>
-              We offer high-quality foods and the best delivery service...
-            </p>
-          </div>
-          <div>
-            <h4 className="font-semibold mb-2">About Us</h4>
-            <ul className="space-y-1">
-              <li>Contact us</li>
-              <li>About team</li>
-              <li>Customer Support</li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="font-semibold mb-2">Our Information</h4>
-            <ul className="space-y-1">
-              <li>Privacy policy</li>
-              <li>Return Policy</li>
-              <li>Site Map</li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="font-semibold mb-2">Community</h4>
-            <ul className="space-y-1">
-              <li>Announcements</li>
-              <li>Answer center</li>
-              <li>Giving works</li>
-            </ul>
-          </div>
-        </div>
-      </footer>
     </div>
+    </UserLayout>
   );
 };
 
