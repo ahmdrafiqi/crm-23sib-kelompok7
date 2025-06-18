@@ -1,152 +1,416 @@
-import React from 'react';
-import { Plus, Percent, Star, Gift } from 'lucide-react';
+// src/pages/HalamanUser/HomePage.jsx
+import React, { useState, useEffect } from 'react';
+import { Heart, Star, ShoppingCart, ArrowRight, Clock } from 'lucide-react';
 import UserLayout from '../../components/HalamanUser/UserLayout';
+import NewsletterPopup from '../../components/HalamanUser/NewsLetterPopup';
 
-const HomePage = () => {
-  const categories = [
-    'Eyeliner', 'Eyeliner', 'Eyeliner', 'Eyeliner',
-    'Eyeliner', 'Eyeliner', 'Eyeliner', 'Eyeliner',
-    'Eyeliner', 'Eyeliner', 'Eyeliner', 'Eyeliner'
+const HomePage = ({ onNavigate }) => {
+  const [showNewsletterPopup, setShowNewsletterPopup] = useState(false);
+
+  // Data produk dengan gambar yang sama untuk sementara
+  const flashSaleProducts = [
+    {
+      id: 1,
+      name: 'SKINTIFIC Aqua Light Daily Sunscreen SPF 35 PA +++',
+      brand: 'SKINTIFIC',
+      price: 74100,
+      originalPrice: 98800,
+      discount: 25,
+      rating: 4.8,
+      reviews: 1200,
+      image: '/src/assets/gambarUser/skintific.png', // Sama semua
+      stock: 'Tersisa 299',
+      badge: 'SALE'
+    },
+    {
+      id: 2,
+      name: 'GLAD2GLOW Milk Amino Acids Gentle Cleanser',
+      brand: 'GLAD2GLOW',
+      price: 36800,
+      originalPrice: 42000,
+      discount: 12,
+      rating: 4.7,
+      reviews: 856,
+      image: '/src/assets/gambarUser/skintific.png', // Sama semua
+      stock: 'Tersisa 301',
+      badge: 'SALE'
+    },
+    {
+      id: 3,
+      name: 'DERMA ANGEL Acne Patch Mix 18',
+      brand: 'DERMA ANGEL',
+      price: 34500,
+      originalPrice: 46000,
+      discount: 25,
+      rating: 4.9,
+      reviews: 2340,
+      image: '/src/assets/gambarUser/skintific.png', // Sama semua
+      stock: 'Tersisa 42',
+      badge: '25%'
+    },
+    {
+      id: 4,
+      name: 'PURE PAW PAW Ointment - Mini Size',
+      brand: 'PURE PAW PAW',
+      price: 46665,
+      originalPrice: 54900,
+      discount: 15,
+      rating: 4.6,
+      reviews: 456,
+      image: '/src/assets/gambarUser/skintific.png', // Sama semua
+      stock: 'Tersisa 28',
+      badge: '15%',
+      exclusive: true
+    },
+    {
+      id: 5,
+      name: 'SKIN1004 Madagascar Centella Light Cleansing Oil',
+      brand: 'SKIN1004',
+      price: 145000,
+      originalPrice: 629000,
+      discount: 77,
+      rating: 4.8,
+      reviews: 934,
+      image: '/src/assets/gambarUser/skintific.png', // Sama semua
+      stock: 'Segera habis',
+      badge: 'SALE'
+    },
+    {
+      id: 6,
+      name: 'SKIN1004 Madagascar Centella Light Cleansing Oil',
+      brand: 'SKIN1004',
+      price: 145000,
+      originalPrice: 629000,
+      discount: 77,
+      rating: 4.8,
+      reviews: 934,
+      image: '/src/assets/gambarUser/skintific.png', // Sama semua
+      stock: 'Segera habis',
+      badge: 'SALE'
+    },
+    {
+      id: 7,
+      name: 'SKIN1004 Madagascar Centella Light Cleansing Oil',
+      brand: 'SKIN1004',
+      price: 145000,
+      originalPrice: 629000,
+      discount: 77,
+      rating: 4.8,
+      reviews: 934,
+      image: '/src/assets/gambarUser/skintific.png', // Sama semua
+      stock: 'Segera habis',
+      badge: 'SALE'
+    },
+    {
+      id: 8,
+      name: 'SKIN1004 Madagascar Centella Light Cleansing Oil',
+      brand: 'SKIN1004',
+      price: 145000,
+      originalPrice: 629000,
+      discount: 77,
+      rating: 4.8,
+      reviews: 934,
+      image: '/src/assets/gambarUser/skintific.png', // Sama semua
+      stock: 'Segera habis',
+      badge: 'SALE'
+    }
   ];
 
-  const products = Array(15).fill(null).map((_, index) => ({
-    id: index + 1,
-    name: 'Compact Powder',
-    price: 'Rp35.000',
-    rating: 4.5,
-    reviews: `${Math.floor(Math.random() * 100) + 1} pcs`
-  }));
+  const bestDealsProducts = [
+    {
+      id: 6,
+      name: 'MEDIHEAL Madecassoside Blemish Pad',
+      brand: 'MEDIHEAL',
+      price: 288150,
+      originalPrice: 339000,
+      discount: 15,
+      rating: 4.8,
+      reviews: 208,
+      image: '/src/assets/gambarUser/skintific.png', // Sama semua
+      options: 'More options available'
+    },
+    {
+      id: 7,
+      name: 'MEDIHEAL THE I.P.I Brightening Ampoule Mask',
+      brand: 'MEDIHEAL',
+      price: 26910,
+      originalPrice: 29900,
+      discount: 10,
+      rating: 4.7,
+      reviews: 6300,
+      image: '/src/assets/gambarUser/skintific.png', // Sama semua
+      award: true
+    },
+    {
+      id: 8,
+      name: 'COSRX AHA/BHA Clarifying Treatment Toner',
+      brand: 'COSRX',
+      price: 160000,
+      originalPrice: 200000,
+      discount: 20,
+      rating: 4.5,
+      reviews: 20500,
+      image: '/src/assets/gambarUser/skintific.png', // Sama semua
+      size: '150 ml'
+    },
+    {
+      id: 9,
+      name: 'ACWELL Licorice pH Balancing Cleansing Toner',
+      brand: 'ACWELL',
+      price: 99000,
+      originalPrice: 165000,
+      discount: 40,
+      rating: 4.6,
+      reviews: 1400,
+      image: '/src/assets/gambarUser/skintific.png', // Sama semua
+      size: '150 ml',
+      exclusive: true
+    }
+  ];
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowNewsletterPopup(true);
+    }, 1500);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  const handleClosePopup = () => {
+    setShowNewsletterPopup(false);
+  };
+
+  const formatPrice = (price) => {
+    return new Intl.NumberFormat('id-ID').format(price);
+  };
+
+  // Komponen untuk render gambar dengan fallback
+  const ProductImage = ({ src, alt, className }) => {
+    const [imageError, setImageError] = useState(false);
+    
+    if (imageError) {
+      // Fallback ke emoji jika gambar gagal load
+      return (
+        <div className={`${className} bg-gray-100 flex items-center justify-center`}>
+          <span className="text-4xl">💄</span>
+        </div>
+      );
+    }
+    
+    return (
+      <img 
+        src={src} 
+        alt={alt} 
+        className={`${className} object-contain p-4 bg-white`} // object-contain + padding biar logo ga distorsi
+        onError={() => setImageError(true)}
+        loading="lazy"
+      />
+    );
+  };
 
   return (
-    <UserLayout>
-      {/* Hero Banners */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6 mb-8">
-        {/* Left Banner */}
-        <div className="bg-gradient-to-r from-orange-100 to-orange-200 rounded-xl lg:rounded-2xl p-6 lg:p-8 relative overflow-hidden">
-          <div className="relative z-10">
-            <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-3 lg:mb-4">
-              Premium Beauty Products
-            </h2>
-            <p className="text-gray-700 mb-4 lg:mb-6 text-sm lg:text-base">
-              Discover our exclusive collection of high-quality cosmetics
-            </p>
-            <button className="bg-orange-500 text-white px-4 lg:px-6 py-2 lg:py-3 rounded-lg hover:bg-orange-600 transition-colors text-sm lg:text-base">
-              Shop Now
-            </button>
-          </div>
-          <div className="absolute right-0 top-0 w-32 lg:w-64 h-full bg-gradient-to-l from-orange-300 to-transparent"></div>
-        </div>
-
-        {/* Right Banner */}
-        <div className="bg-gradient-to-r from-pink-100 to-blue-100 rounded-xl lg:rounded-2xl p-6 lg:p-8 relative overflow-hidden">
-          <div className="relative z-10">
-            <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-3 lg:mb-4">
-              Makeup Essentials
-            </h2>
-            <p className="text-gray-700 mb-4 lg:mb-6 text-sm lg:text-base">
-              Everything you need for the perfect look
-            </p>
-            <button className="bg-pink-500 text-white px-4 lg:px-6 py-2 lg:py-3 rounded-lg hover:bg-pink-600 transition-colors text-sm lg:text-base">
-              Explore
-            </button>
-          </div>
-          <div className="absolute right-0 top-0 w-32 lg:w-64 h-full bg-gradient-to-l from-pink-300 to-transparent"></div>
-        </div>
-      </div>
-
-      {/* Feature Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-6 mb-8">
-        <div className="bg-white rounded-xl lg:rounded-2xl p-4 lg:p-6 shadow-sm">
-          <div className="flex items-center">
-            <div className="bg-pink-100 p-2 lg:p-3 rounded-full mr-3 lg:mr-4">
-              <Percent className="w-5 h-5 lg:w-6 lg:h-6 text-pink-500" />
-            </div>
-            <div>
-              <h3 className="font-semibold text-gray-900 text-sm lg:text-base">Digital Coupons</h3>
-              <p className="text-xs lg:text-sm text-gray-600">Save time & money, Just before you go</p>
-            </div>
-          </div>
-        </div>
-
-        <div className="bg-white rounded-xl lg:rounded-2xl p-4 lg:p-6 shadow-sm">
-          <div className="flex items-center">
-            <div className="bg-pink-100 p-2 lg:p-3 rounded-full mr-3 lg:mr-4">
-              <Star className="w-5 h-5 lg:w-6 lg:h-6 text-pink-500" />
-            </div>
-            <div>
-              <h3 className="font-semibold text-gray-900 text-sm lg:text-base">Digital Spotlight</h3>
-              <p className="text-xs lg:text-sm text-gray-600">Find products easily & navigate store with the app</p>
-            </div>
-          </div>
-        </div>
-
-        <div className="bg-white rounded-xl lg:rounded-2xl p-4 lg:p-6 shadow-sm">
-          <div className="flex items-center">
-            <div className="bg-pink-100 p-2 lg:p-3 rounded-full mr-3 lg:mr-4">
-              <Gift className="w-5 h-5 lg:w-6 lg:h-6 text-pink-500" />
-            </div>
-            <div>
-              <h3 className="font-semibold text-gray-900 text-sm lg:text-base">Online Promotion</h3>
-              <p className="text-xs lg:text-sm text-gray-600">Select an online shopping store to see current offers</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Categories Section */}
+    <UserLayout activeTab="home" onNavigate={onNavigate}>
+      {/* Flash Sale Section */}
       <div className="mb-8">
-        <h2 className="text-xl lg:text-2xl font-bold text-gray-900 mb-4 lg:mb-6">Kategori</h2>
-        <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 lg:gap-4">
-          {categories.map((category, index) => (
-            <div key={index} className="bg-pink-100 rounded-xl lg:rounded-2xl p-3 lg:p-4 text-center hover:bg-pink-200 transition-colors cursor-pointer">
-              <div className="w-10 h-10 lg:w-12 lg:h-12 bg-white rounded-full mx-auto mb-2 lg:mb-3 flex items-center justify-center">
-                <span className="text-pink-500 font-bold text-lg lg:text-xl">💄</span>
-              </div>
-              <span className="text-gray-700 font-medium text-xs lg:text-sm">{category}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Products Section */}
-      <div className="mb-8">
-        <h2 className="text-xl lg:text-2xl font-bold text-gray-900 mb-4 lg:mb-6">Produk Terlaris</h2>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 lg:gap-4">
-          {products.map((product) => (
-            <div key={product.id} className="bg-white rounded-xl lg:rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-              <div className="relative">
-                <div className="aspect-square bg-pink-50 flex items-center justify-center">
-                  <span className="text-2xl lg:text-4xl">💄</span>
+        {/* Flash Sale Header */}
+        <div className="bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-600 rounded-xl p-1 mb-6">
+          <div className="bg-white rounded-lg p-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-4">
+                <div className="bg-gradient-to-r from-yellow-400 to-pink-500 text-white px-4 py-2 rounded-full font-bold text-sm">
+                  ONLINE SPECIAL ⚡FLASH SALE
                 </div>
-                <button className="absolute top-2 lg:top-3 right-2 lg:right-3 bg-pink-500 text-white rounded-full w-6 h-6 lg:w-8 lg:h-8 flex items-center justify-center hover:bg-pink-600">
-                  <Plus className="w-3 h-3 lg:w-4 lg:h-4" />
+                <div className="text-sm">
+                  <div className="font-medium text-gray-900">Now Live</div>
+                  <div className="text-gray-600">
+                    Ends in <span className="font-bold text-red-500">10:12:37</span>
+                  </div>
+                </div>
+              </div>
+              <button 
+                onClick={() => onNavigate('produk')}
+                className="bg-red-500 text-white px-6 py-2 rounded-lg hover:bg-red-600 transition-colors font-medium"
+              >
+                See all
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Flash Sale Products */}
+        <div className="bg-gradient-to-b from-blue-50 to-blue-100 rounded-xl p-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-8 gap-4">
+            {flashSaleProducts.map((product) => (
+              <div key={product.id} className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                <div className="relative">
+                  <div className="aspect-square">
+                    <ProductImage 
+                      src={product.image}
+                      alt={product.name}
+                      className="w-full h-full"
+                    />
+                  </div>
+                  
+                  {/* Badges */}
+                  <div className="absolute top-2 left-2">
+                    <div className="bg-red-500 text-white px-2 py-1 rounded text-xs font-bold">
+                      {product.badge}
+                    </div>
+                  </div>
+                  
+                  <button className="absolute top-2 right-2 bg-white bg-opacity-80 p-1 rounded-full shadow">
+                    <Heart className="w-4 h-4 text-gray-600" />
+                  </button>
+
+                  {/* Stock Info */}
+                  <div className="absolute bottom-2 left-2 right-2">
+                    <div className={`text-center text-xs font-medium px-2 py-1 rounded ${
+                      product.stock.includes('habis') ? 'bg-red-100 text-red-600' : 
+                      product.stock.includes('28') || product.stock.includes('42') ? 'bg-pink-100 text-pink-600' :
+                      'bg-green-100 text-green-600'
+                    }`}>
+                      {product.stock}
+                    </div>
+                  </div>
+
+                  {/* Exclusive Badge */}
+                  {product.exclusive && (
+                    <div className="absolute top-12 left-2 bg-pink-100 text-pink-600 px-2 py-1 rounded text-xs font-medium">
+                      ONLINE ONLY
+                    </div>
+                  )}
+                </div>
+
+                <div className="p-3">
+                  <div className="text-xs text-gray-500 mb-1">30gr</div>
+                  <div className="text-xs font-medium text-gray-900 mb-1">{product.brand}</div>
+                  <h3 className="text-sm text-gray-900 mb-2 line-clamp-2 leading-tight">{product.name}</h3>
+                  
+                  <div className="space-y-1 mb-2">
+                    <div className="text-red-500 font-bold text-sm">
+                      Rp{formatPrice(product.price)} ⚡
+                    </div>
+                    <div className="text-xs text-gray-400 line-through">
+                      Rp{formatPrice(product.originalPrice)}
+                    </div>
+                  </div>
+
+                  <div className="flex items-center space-x-1">
+                    <Star className="w-3 h-3 text-yellow-400 fill-current" />
+                    <span className="text-xs text-gray-600">
+                      {product.rating} ({product.reviews > 1000 ? `${Math.floor(product.reviews/1000)}k` : product.reviews})
+                    </span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Best Deals Section */}
+      <div className="mb-8">
+        <h2 className="text-xl font-bold text-gray-900 mb-6">More to explore for you, Bestie!</h2>
+        
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+          {/* Value Pack Banner */}
+          <div className="lg:row-span-2">
+            <div className="bg-gradient-to-br from-pink-400 to-pink-500 text-white rounded-2xl p-6 h-full relative overflow-hidden min-h-[300px] flex flex-col justify-center">
+              <div className="absolute -top-4 -right-4 text-8xl opacity-20">🛍️</div>
+              <div className="relative z-10">
+                <div className="bg-red-500 text-white px-3 py-1 rounded-full text-sm font-bold mb-4 inline-block">
+                  Value Pack
+                </div>
+                <h3 className="text-2xl font-bold mb-2">BUY</h3>
+                <h3 className="text-2xl font-bold mb-2">MORE</h3>
+                <h3 className="text-2xl font-bold mb-4">SPEND</h3>
+                <h3 className="text-2xl font-bold mb-6">LESS</h3>
+                <button 
+                  onClick={() => onNavigate('produk')}
+                  className="bg-black text-white px-6 py-2 rounded-lg hover:bg-gray-800 transition-colors font-medium"
+                >
+                  SHOP ALL
                 </button>
               </div>
-              <div className="p-3 lg:p-4">
-                <h3 className="font-semibold text-gray-900 mb-1 text-sm lg:text-base">{product.name}</h3>
-                <p className="text-pink-500 font-bold mb-2 text-sm lg:text-base">{product.price}</p>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-1">
-                    <Star className="w-3 h-3 lg:w-4 lg:h-4 text-yellow-400 fill-current" />
-                    <span className="text-xs lg:text-sm text-gray-600">{product.rating}</span>
-                  </div>
-                  <span className="text-xs lg:text-sm text-gray-500">{product.reviews}</span>
-                </div>
-              </div>
             </div>
-          ))}
+          </div>
+
+          {/* Product Grid */}
+          <div className="lg:col-span-3">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {bestDealsProducts.map((product) => (
+                <div key={product.id} className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                  <div className="relative">
+                    <div className="aspect-square">
+                      <ProductImage 
+                        src={product.image}
+                        alt={product.name}
+                        className="w-full h-full"
+                      />
+                    </div>
+                    
+                    <div className="absolute top-2 left-2 bg-red-500 text-white px-2 py-1 rounded text-xs font-bold">
+                      {product.discount}%
+                    </div>
+                    
+                    <button className="absolute top-2 right-2 bg-white bg-opacity-80 p-1 rounded-full shadow">
+                      <Heart className="w-4 h-4 text-gray-600" />
+                    </button>
+
+                    {product.award && (
+                      <div className="absolute top-12 right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs">
+                        🏆
+                      </div>
+                    )}
+
+                    {product.exclusive && (
+                      <div className="absolute bottom-2 left-2 right-2">
+                        <div className="bg-pink-100 text-pink-600 px-2 py-1 rounded text-xs font-medium text-center">
+                          EXCLUSIVE
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="p-3">
+                    {product.options && (
+                      <div className="text-xs text-gray-500 mb-1">{product.options}</div>
+                    )}
+                    {product.size && (
+                      <div className="text-xs text-gray-500 mb-1">{product.size}</div>
+                    )}
+                    
+                    <div className="text-xs font-medium text-gray-900 mb-1">{product.brand}</div>
+                    <h3 className="text-sm text-gray-900 mb-2 line-clamp-2 leading-tight">{product.name}</h3>
+                    
+                    <div className="space-y-1 mb-2">
+                      <div className="text-red-500 font-bold text-sm">
+                        Rp{formatPrice(product.price)}
+                      </div>
+                      <div className="text-xs text-gray-400 line-through">
+                        Rp{formatPrice(product.originalPrice)}
+                      </div>
+                    </div>
+
+                    <div className="flex items-center space-x-1">
+                      <Star className="w-3 h-3 text-yellow-400 fill-current" />
+                      <span className="text-xs text-gray-600">
+                        {product.rating} ({product.reviews > 1000 ? `${Math.floor(product.reviews/1000)}k` : product.reviews})
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* Get to Know Us Section */}
-      <div className="mb-8">
-        <h2 className="text-xl lg:text-2xl font-bold text-gray-900 mb-4 lg:mb-6">Get to know us</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-6">
-          <div className="bg-gradient-to-br from-pink-200 to-pink-300 rounded-xl lg:rounded-2xl aspect-video"></div>
-          <div className="bg-gradient-to-br from-pink-200 to-pink-300 rounded-xl lg:rounded-2xl aspect-video"></div>
-          <div className="bg-gradient-to-br from-pink-200 to-pink-300 rounded-xl lg:rounded-2xl aspect-video"></div>
-        </div>
-      </div>
+      {/* Newsletter Popup */}
+      <NewsletterPopup 
+        isOpen={showNewsletterPopup} 
+        onClose={handleClosePopup} 
+      />
     </UserLayout>
   );
 };

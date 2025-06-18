@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Pencil, User, Heart, ShoppingBag, LogOut } from 'lucide-react';
-import CoverImage from '../../assets/assetsUser/Gambar.png';
-import ProfilePic from '../../assets/assetsUser/Profil.jpg';
+import CoverImage from '../../assets/gambarUser/skintific.png';
+import ProfilePic from '../../assets/gambarUser/logo-missglam.png';
 import UserLayout from '../../components/HalamanUser/UserLayout';
+
 
 const ProfileUser = () => {
   const [activeTab, setActiveTab] = useState('account');
