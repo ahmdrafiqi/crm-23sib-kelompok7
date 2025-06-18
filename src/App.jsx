@@ -23,6 +23,7 @@ import RiwayatPage from './pages/HalamanUser/RiwayatPage';
 import CartPage from "./pages/HalamanUser/CartPage";
 import CheckoutPage from "./pages/HalamanUser/CheckoutPage";
 import ProfilePage from "./pages/HalamanUser/ProfilePage";
+import DetailMember from "./pages/HalamanUser/DetailMember";
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
       {/* <Route path='/profil' element={ <ProfileUser/>} /> */}
       <Route path='/home' element={ <HomePage/>} />
       <Route path='/member' element={ <Member/>} />
+      <Route path="/detail-member" element={<DetailMember />} /> 
       <Route path="/product" element={<ProdukPage />} />
       <Route path="/riwayat" element={<RiwayatPage />} />
       <Route path="/cart" element={<CartPage />} />
