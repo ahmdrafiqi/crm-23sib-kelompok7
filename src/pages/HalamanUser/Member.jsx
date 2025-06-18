@@ -3,7 +3,7 @@ import UserLayout from '../../components/HalamanUser/UserLayout';
 import { Heart, Lock, Star, ChevronRight } from 'lucide-react';
 import { FaBirthdayCake } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import Header from '../../components/HalamanUser/Header';
+
 
 const progressWidth = {
   transaksi: '60%',

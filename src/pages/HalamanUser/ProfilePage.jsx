@@ -1,9 +1,7 @@
-// src/pages/HalamanUser/ProfilePage.jsx
 import React, { useState, useEffect } from 'react';
 import { User, MapPin, Phone, Mail, Calendar, Package, Edit2, Save, X } from 'lucide-react';
 
-import Header from '../../components/HalamanUser/Header';
-import Header from '../../components/HalamanUser/Footer';
+
 
 
 
@@ -187,7 +185,7 @@ const ProfilePage = ({ onNavigate }) => {
   if (!currentUser) {
     return (
       <>
-      <Header activeTab="profile" onNavigate={onNavigate} />
+     
         <div className="text-center py-16">
           <div className="text-gray-400 text-6xl mb-4">🔒</div>
           <h3 className="text-xl font-semibold text-gray-900 mb-2">Silakan Login</h3>
@@ -199,16 +197,13 @@ const ProfilePage = ({ onNavigate }) => {
             Kembali ke Home
           </button>
         </div>
-      <Footer />
+    
       </>
     );
   }
 
   return (
-    <>
-    <Header activeTab="profile" onNavigate={onNavigate} />
-      <div className="mb-8">
-        {/* Header */}
+    <> 
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">Profil Saya</h1>
           <p className="text-gray-600">Kelola informasi profil Anda</p>
@@ -390,8 +385,6 @@ const ProfilePage = ({ onNavigate }) => {
               </div>
             </div>
           )}
-
-
         </div>
 
         {/* Statistics */}
@@ -421,8 +414,6 @@ const ProfilePage = ({ onNavigate }) => {
             </div>
           </div>
         )}
-      </div>
-    <Footer />
     </>
   );
 };
