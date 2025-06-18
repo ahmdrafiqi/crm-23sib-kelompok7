@@ -1,8 +1,3 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-// import { Route } from 'lucide-react'
-// import './App.css'
 import { Routes, Route } from "react-router-dom";
 
 import Promo from "./pages/SystemPromo"
@@ -22,32 +17,39 @@ import ProdukPage from './pages/HalamanUser/ProdukPage'
 import RiwayatPage from './pages/HalamanUser/RiwayatPage';
 import CartPage from "./pages/HalamanUser/CartPage";
 import CheckoutPage from "./pages/HalamanUser/CheckoutPage";
-import ProfilePage from "./pages/HalamanUser/ProfilePage";
+import ProductDetail from "./pages/HalamanUser/DetailProduct";
+import UserLayout from "./components/HalamanUser/UserLayout";
 
 function App() {
   return (
     <Routes>
-      <Route element={<MainLayout />}>
-        <Route path="/" element={<Dashboard />} />
-        <Route path="/pelanggan" element={<Pelanggan />} />
-        <Route path="/penjualan" element={<Penjualan />} />
-        <Route path="/promo" element={<Promo />} />
-        <Route path="/masuk" element={<Masuk />} />
-        <Route path="/daftar" element={<Daftar />} />
-        <Route path="/" element={<Dashboard />} />
-        <Route path="/produk" element={<Produk />} />
-        <Route path="/pesanan" element={<CekPesanan />} />
-        <Route path="/faq" element={<FAQ />} />
+      {/* Admin Pages */}
+      <Route path="/admin" element={<MainLayout />}>
+        <Route index element={<Dashboard />} /> {/* /admin */}
+        <Route path="pelanggan" element={<Pelanggan />} />
+        <Route path="penjualan" element={<Penjualan />} />
+        <Route path="promo" element={<Promo />} />
+        <Route path="produk" element={<Produk />} />
+        <Route path="pesanan" element={<CekPesanan />} />
+        <Route path="faq" element={<FAQ />} />
       </Route>
 
-      {/* <Route path='/profil' element={ <ProfileUser/>} /> */}
-      <Route path='/home' element={ <HomePage/>} />
-      <Route path='/member' element={ <Member/>} />
-      <Route path="/product" element={<ProdukPage />} />
-      <Route path="/riwayat" element={<RiwayatPage />} />
-      <Route path="/cart" element={<CartPage />} />
-      <Route path="/checkout" element={<CheckoutPage />} />
-      <Route path="/profil" element={<ProfilePage />} />
+      {/* Auth Pages */}
+      <Route path="/masuk" element={<Masuk />} />
+      <Route path="/daftar" element={<Daftar />} />
+
+      {/* User Pages */}
+      <Route path="/" element={<UserLayout />}>
+        <Route index element={<HomePage />} /> {/* / */}
+        <Route path="home" element={<HomePage />} />
+        <Route path="member" element={<Member />} />
+        <Route path="product" element={<ProdukPage />} />
+        <Route path="product/:id" element={<ProductDetail />} />
+        <Route path="riwayat" element={<RiwayatPage />} />
+        <Route path="cart" element={<CartPage />} />
+        <Route path="checkout" element={<CheckoutPage />} />
+        <Route path="profil" element={<ProfileUser />} />
+      </Route>
     </Routes>
   );
 }

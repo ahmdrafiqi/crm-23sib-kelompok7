@@ -2,6 +2,7 @@ import React from 'react';
 import UserLayout from '../../components/HalamanUser/UserLayout';
 import { Heart, Lock, Star, ChevronRight } from 'lucide-react';
 import { FaBirthdayCake } from 'react-icons/fa';
+import Header from '../../components/HalamanUser/Header';
 
 const progressWidth = {
   transaksi: '60%',
@@ -46,7 +47,8 @@ const benefits = [
 
 const Member = () => {
   return (
-    <UserLayout>
+    <>
+    <Header />
       <div className="max-w-6xl mx-auto p-4 md:p-6 lg:p-8 space-y-8">
         {/* Tier Card */}
         <div className="bg-[#FFF7F1] rounded-lg p-4 md:p-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -136,7 +138,8 @@ const Member = () => {
           </div>
         </div>
       </div>
-    </UserLayout>
+    <Footer />
+    </>
   );
 };
 

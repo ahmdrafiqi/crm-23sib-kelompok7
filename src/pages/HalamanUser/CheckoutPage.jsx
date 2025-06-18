@@ -1,7 +1,6 @@
-// src/pages/HalamanUser/CheckoutPage.jsx
 import React, { useState, useEffect } from 'react';
 import { MapPin, CreditCard, Truck, ArrowLeft, CheckCircle } from 'lucide-react';
-import UserLayout from '../../components/HalamanUser/UserLayout';
+
 
 const CheckoutPage = () => {
   const [currentUser, setCurrentUser] = useState(null);
@@ -184,7 +183,7 @@ const CheckoutPage = () => {
 
   if (!currentUser || cartItems.length === 0) {
     return (
-      <UserLayout activeTab="checkout">
+      <>
         <div className="text-center py-16">
           <div className="text-gray-400 text-6xl mb-4">🛒</div>
           <h3 className="text-xl font-semibold text-gray-900 mb-2">Keranjang Kosong</h3>
@@ -196,14 +195,13 @@ const CheckoutPage = () => {
             Mulai Belanja
           </button>
         </div>
-      </UserLayout>
+      </>
     );
   }
 
   return (
-    <UserLayout activeTab="checkout">
-      <div className="mb-8">
-        {/* Header */}
+    <>
+   
         <div className="flex items-center mb-8">
           <button 
             onClick={() => window.navigateTo && window.navigateTo('cart')}
@@ -450,9 +448,8 @@ const CheckoutPage = () => {
              </div>
            </div>
          </div>
-       </form>
-     </div>
-   </UserLayout>
+       </form>      
+   </>
  );
 };
 

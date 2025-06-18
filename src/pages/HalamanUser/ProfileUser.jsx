@@ -3,6 +3,7 @@ import { Pencil, User, Heart, ShoppingBag, LogOut } from 'lucide-react';
 import CoverImage from '../../assets/gambarUser/skintific.png';
 import ProfilePic from '../../assets/gambarUser/logo-missglam.png';
 import UserLayout from '../../components/HalamanUser/UserLayout';
+import Footer from '../../components/HalamanUser/Footer';
 
 
 const ProfileUser = () => {
@@ -16,7 +17,8 @@ const ProfileUser = () => {
   ];
 
   return (
-    <UserLayout>
+    <>
+    <Header />
     <div className="bg-white text-gray-800">
       {/* Header */}
       <header className="bg-white shadow-md p-4 flex justify-between items-center">
@@ -144,7 +146,8 @@ const ProfileUser = () => {
         </div>
       </section>
     </div>
-    </UserLayout>
+    <Footer />
+    </>
   );
 };
 

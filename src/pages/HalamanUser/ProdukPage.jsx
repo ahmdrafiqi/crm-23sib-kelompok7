@@ -1,7 +1,9 @@
 // src/pages/HalamanUser/ProdukPage.jsx
 import React, { useState, useEffect } from 'react';
 import { Filter, ChevronDown, Heart, Star, ShoppingCart, Grid, List } from 'lucide-react';
-import UserLayout from '../../components/HalamanUser/UserLayout';
+import ProductCard from '../../components/HalamanUser/ProductCard';
+
+
 
 const ProdukPage = ({ onNavigate }) => {
   const [products, setProducts] = useState([]);
@@ -224,8 +226,9 @@ const ProdukPage = ({ onNavigate }) => {
   };
 
   return (
-    <UserLayout activeTab="produk" onNavigate={onNavigate}>
-      <div className="mb-8">
+    <>
+    
+    
         {/* Page Header */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">Produk Kecantikan</h1>
@@ -305,80 +308,7 @@ const ProdukPage = ({ onNavigate }) => {
             : 'grid-cols-1'
         }`}>
           {filteredProducts.map((product) => (
-            <div key={product.id} className={`bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all ${
-              viewMode === 'list' ? 'flex' : ''
-            }`}>
-              <div className={`relative ${viewMode === 'list' ? 'w-48' : ''}`}>
-                <div className={`${
-                  viewMode === 'list' ? 'h-48' : 'aspect-square'
-                }`}>
-                  <ProductImage 
-                    src={product.image}
-                    alt={product.name}
-                    className="w-full h-full"
-                  />
-                </div>
-
-                {/* Badges */}
-                <div className="absolute top-3 left-3 flex flex-col gap-1">
-                  {product.discount > 0 && (
-                    <span className="bg-red-500 text-white px-2 py-1 rounded text-xs font-bold">
-                      -{product.discount}%
-                    </span>
-                  )}
-                  {product.isNew && (
-                    <span className="bg-green-500 text-white px-2 py-1 rounded text-xs font-bold">
-                      NEW
-                    </span>
-                  )}
-                  {product.isBestseller && (
-                    <span className="bg-yellow-500 text-white px-2 py-1 rounded text-xs font-bold">
-                      BEST
-                    </span>
-                  )}
-                </div>
-
-                <button className="absolute top-3 right-3 bg-white bg-opacity-80 p-2 rounded-full shadow hover:bg-opacity-100 transition-all">
-                  <Heart className="w-4 h-4 text-gray-600" />
-                </button>
-              </div>
-
-              <div className={`p-4 ${viewMode === 'list' ? 'flex-1' : ''}`}>
-                <div className="text-xs text-gray-500 mb-1 uppercase font-medium">{product.brand}</div>
-                <h3 className={`font-semibold text-gray-900 mb-2 ${
-                  viewMode === 'list' ? 'text-lg' : 'text-sm'
-                } line-clamp-2`}>
-                  {product.name}
-                </h3>
-
-                <div className="flex items-center space-x-1 mb-3">
-                  <Star className="w-4 h-4 text-yellow-400 fill-current" />
-                  <span className="text-sm font-medium">{product.rating}</span>
-                  <span className="text-xs text-gray-500">({product.reviews})</span>
-                </div>
-
-                <div className="space-y-2 mb-4">
-                  <div className="flex items-center space-x-2">
-                    <span className="text-pink-500 font-bold text-lg">
-                      Rp{formatPrice(product.price)}
-                    </span>
-                    {product.originalPrice > product.price && (
-                      <span className="text-gray-400 line-through text-sm">
-                        Rp{formatPrice(product.originalPrice)}
-                      </span>
-                    )}
-                  </div>
-                </div>
-
-                <button
-                  onClick={() => addToCart(product.id)}
-                  className="w-full bg-pink-500 text-white py-2 px-4 rounded-lg hover:bg-pink-600 transition-colors font-medium flex items-center justify-center space-x-2"
-                >
-                  <ShoppingCart className="w-4 h-4" />
-                  <span>Tambah ke Keranjang</span>
-                </button>
-              </div>
-            </div>
+            <ProductCard key={product.id} product={product} formatPrice={formatPrice} />
           ))}
         </div>
 
@@ -390,8 +320,9 @@ const ProdukPage = ({ onNavigate }) => {
             <p className="text-gray-600">Coba ubah filter atau kata kunci pencarian Anda</p>
           </div>
         )}
-      </div>
-    </UserLayout>
+      
+   
+    </>
   );
 };
 

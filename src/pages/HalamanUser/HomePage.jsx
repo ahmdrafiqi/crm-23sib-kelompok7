@@ -1,8 +1,10 @@
 // src/pages/HalamanUser/HomePage.jsx
 import React, { useState, useEffect } from 'react';
 import { Heart, Star, ShoppingCart, ArrowRight, Clock } from 'lucide-react';
-import UserLayout from '../../components/HalamanUser/UserLayout';
 import NewsletterPopup from '../../components/HalamanUser/NewsLetterPopup';
+import ProductCard from '../../components/HalamanUser/ProductCard';
+;
+
 
 const HomePage = ({ onNavigate }) => {
   const [showNewsletterPopup, setShowNewsletterPopup] = useState(false);
@@ -170,7 +172,9 @@ const HomePage = ({ onNavigate }) => {
   };
 
   return (
-    <UserLayout activeTab="home" onNavigate={onNavigate}>
+    <>
+ 
+      
       {/* Flash Sale Section */}
       <div className="mb-8">
         {/* Flash Sale Header */}
@@ -202,68 +206,7 @@ const HomePage = ({ onNavigate }) => {
         <div className="bg-gradient-to-b from-blue-50 to-blue-100 rounded-xl p-6">
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
             {flashSaleProducts.map((product) => (
-              <div key={product.id} className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-                <div className="relative">
-                  <div className="aspect-square">
-                    <ProductImage 
-                      src={product.image}
-                      alt={product.name}
-                      className="w-full h-full"
-                    />
-                  </div>
-                  
-                  {/* Badges */}
-                  <div className="absolute top-2 left-2">
-                    <div className="bg-red-500 text-white px-2 py-1 rounded text-xs font-bold">
-                      {product.badge}
-                    </div>
-                  </div>
-                  
-                  <button className="absolute top-2 right-2 bg-white bg-opacity-80 p-1 rounded-full shadow">
-                    <Heart className="w-4 h-4 text-gray-600" />
-                  </button>
-
-                  {/* Stock Info */}
-                  <div className="absolute bottom-2 left-2 right-2">
-                    <div className={`text-center text-xs font-medium px-2 py-1 rounded ${
-                      product.stock.includes('habis') ? 'bg-red-100 text-red-600' : 
-                      product.stock.includes('28') || product.stock.includes('42') ? 'bg-pink-100 text-pink-600' :
-                      'bg-green-100 text-green-600'
-                    }`}>
-                      {product.stock}
-                    </div>
-                  </div>
-
-                  {/* Exclusive Badge */}
-                  {product.exclusive && (
-                    <div className="absolute top-12 left-2 bg-pink-100 text-pink-600 px-2 py-1 rounded text-xs font-medium">
-                      ONLINE ONLY
-                    </div>
-                  )}
-                </div>
-
-                <div className="p-3">
-                  <div className="text-xs text-gray-500 mb-1">30gr</div>
-                  <div className="text-xs font-medium text-gray-900 mb-1">{product.brand}</div>
-                  <h3 className="text-sm text-gray-900 mb-2 line-clamp-2 leading-tight">{product.name}</h3>
-                  
-                  <div className="space-y-1 mb-2">
-                    <div className="text-red-500 font-bold text-sm">
-                      Rp{formatPrice(product.price)} ⚡
-                    </div>
-                    <div className="text-xs text-gray-400 line-through">
-                      Rp{formatPrice(product.originalPrice)}
-                    </div>
-                  </div>
-
-                  <div className="flex items-center space-x-1">
-                    <Star className="w-3 h-3 text-yellow-400 fill-current" />
-                    <span className="text-xs text-gray-600">
-                      {product.rating} ({product.reviews > 1000 ? `${Math.floor(product.reviews/1000)}k` : product.reviews})
-                    </span>
-                  </div>
-                </div>
-              </div>
+              <ProductCard key={product.id} product={product} formatPrice={formatPrice} />
             ))}
           </div>
         </div>
@@ -300,79 +243,21 @@ const HomePage = ({ onNavigate }) => {
           <div className="lg:col-span-3">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {bestDealsProducts.map((product) => (
-                <div key={product.id} className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-                  <div className="relative">
-                    <div className="aspect-square">
-                      <ProductImage 
-                        src={product.image}
-                        alt={product.name}
-                        className="w-full h-full"
-                      />
-                    </div>
-                    
-                    <div className="absolute top-2 left-2 bg-red-500 text-white px-2 py-1 rounded text-xs font-bold">
-                      {product.discount}%
-                    </div>
-                    
-                    <button className="absolute top-2 right-2 bg-white bg-opacity-80 p-1 rounded-full shadow">
-                      <Heart className="w-4 h-4 text-gray-600" />
-                    </button>
-
-                    {product.award && (
-                      <div className="absolute top-12 right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs">
-                        🏆
-                      </div>
-                    )}
-
-                    {product.exclusive && (
-                      <div className="absolute bottom-2 left-2 right-2">
-                        <div className="bg-pink-100 text-pink-600 px-2 py-1 rounded text-xs font-medium text-center">
-                          EXCLUSIVE
-                        </div>
-                      </div>
-                    )}
-                  </div>
-
-                  <div className="p-3">
-                    {product.options && (
-                      <div className="text-xs text-gray-500 mb-1">{product.options}</div>
-                    )}
-                    {product.size && (
-                      <div className="text-xs text-gray-500 mb-1">{product.size}</div>
-                    )}
-                    
-                    <div className="text-xs font-medium text-gray-900 mb-1">{product.brand}</div>
-                    <h3 className="text-sm text-gray-900 mb-2 line-clamp-2 leading-tight">{product.name}</h3>
-                    
-                    <div className="space-y-1 mb-2">
-                      <div className="text-red-500 font-bold text-sm">
-                        Rp{formatPrice(product.price)}
-                      </div>
-                      <div className="text-xs text-gray-400 line-through">
-                        Rp{formatPrice(product.originalPrice)}
-                      </div>
-                    </div>
-
-                    <div className="flex items-center space-x-1">
-                      <Star className="w-3 h-3 text-yellow-400 fill-current" />
-                      <span className="text-xs text-gray-600">
-                        {product.rating} ({product.reviews > 1000 ? `${Math.floor(product.reviews/1000)}k` : product.reviews})
-                      </span>
-                    </div>
-                  </div>
-                </div>
+                  <ProductCard key={product.id} product={product} formatPrice={formatPrice} />
               ))}
             </div>
           </div>
         </div>
       </div>
+  
 
       {/* Newsletter Popup */}
       <NewsletterPopup 
         isOpen={showNewsletterPopup} 
         onClose={handleClosePopup} 
       />
-    </UserLayout>
+      
+      </>
   );
 };
 

@@ -1,7 +1,5 @@
-// src/pages/HalamanUser/RiwayatPage.jsx
 import React, { useState, useEffect } from 'react';
 import { Package, Clock, CheckCircle, XCircle, Eye } from 'lucide-react';
-import UserLayout from '../../components/HalamanUser/UserLayout';
 
 const RiwayatPage = () => {
   const [currentUser, setCurrentUser] = useState(null);
@@ -131,7 +129,8 @@ const RiwayatPage = () => {
 
   if (!currentUser) {
     return (
-      <UserLayout activeTab="riwayat">
+      <>
+     
         <div className="text-center py-16">
           <div className="text-gray-400 text-6xl mb-4">🔒</div>
           <h3 className="text-xl font-semibold text-gray-900 mb-2">Silakan Login</h3>
@@ -143,13 +142,13 @@ const RiwayatPage = () => {
             Kembali ke Home
           </button>
         </div>
-      </UserLayout>
+      
+      </>
     );
   }
 
   return (
-    <UserLayout activeTab="riwayat">
-      <div className="mb-8">
+    <>
         {/* Page Header */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">Riwayat Pesanan</h1>
@@ -309,8 +308,8 @@ const RiwayatPage = () => {
            </div>
          </div>
        )}
-     </div>
-   </UserLayout>
+ 
+   </>
  );
 };
 

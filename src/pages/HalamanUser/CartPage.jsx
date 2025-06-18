@@ -1,7 +1,6 @@
 // src/pages/HalamanUser/CartPage.jsx
 import React, { useState, useEffect } from 'react';
 import { Plus, Minus, Trash2, ShoppingBag, ArrowLeft } from 'lucide-react';
-import UserLayout from '../../components/HalamanUser/UserLayout';
 
 const CartPage = () => {
   const [currentUser, setCurrentUser] = useState(null);
@@ -114,7 +113,7 @@ const CartPage = () => {
 
   if (!currentUser) {
     return (
-      <UserLayout activeTab="cart">
+      <>
         <div className="text-center py-16">
           <div className="text-gray-400 text-6xl mb-4">🔒</div>
           <h3 className="text-xl font-semibold text-gray-900 mb-2">Silakan Login</h3>
@@ -126,14 +125,13 @@ const CartPage = () => {
             Kembali ke Home
           </button>
         </div>
-      </UserLayout>
+      </>
     );
   }
 
   return (
-    <UserLayout activeTab="cart">
-      <div className="mb-8">
-        {/* Header */}
+    <>
+
         <div className="flex items-center mb-8">
           <button 
             onClick={() => window.navigateTo && window.navigateTo('produk')}
@@ -284,8 +282,9 @@ const CartPage = () => {
             </div>
           </div>
         )}
-      </div>
-    </UserLayout>
+      
+ 
+    </>
   );
 };
 

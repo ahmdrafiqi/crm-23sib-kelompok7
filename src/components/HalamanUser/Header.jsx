@@ -1,12 +1,14 @@
 // src/components/HalamanUser/Header.jsx
 import React, { useState, useEffect } from 'react';
 import { Search, ShoppingCart, User, MapPin, ChevronDown, LogOut } from 'lucide-react';
+import { NavLink, useNavigate } from 'react-router-dom';
 import LoginPopup from './LoginPopup';
 
 const Header = ({ activeTab = 'home' }) => {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     const user = localStorage.getItem('currentUser');
@@ -24,8 +26,7 @@ const Header = ({ activeTab = 'home' }) => {
   const handleSearch = (e) => {
     e.preventDefault();
     if (searchQuery.trim()) {
-      // Redirect ke halaman produk dengan search query
-      window.location.href = `/produk?search=${encodeURIComponent(searchQuery)}`;
+      navigate(`/produk?search=${encodeURIComponent(searchQuery)}`);
     }
   };
 
@@ -42,7 +43,7 @@ const Header = ({ activeTab = 'home' }) => {
         {/* Top Navigation */}
         <div className="max-w-full mx-auto px-4 lg:px-6">
           <div className="flex items-center h-16">
-            {/* Logo dan Search Bar (kiri) */}
+            {/* Logo dan Search Bar */}
             <div className="flex items-center flex-1">
               {/* Logo */}
               <div className="flex items-center mr-8">
@@ -50,11 +51,11 @@ const Header = ({ activeTab = 'home' }) => {
                   src="/src/assets/gambarUser/logo-missglam.png" 
                   alt="Miss Glam Logo" 
                   className="h-13 w-auto cursor-pointer"
-                  onClick={() => window.location.href = '/home'}
+                  onClick={() => navigate('/home')}
                 />
               </div>
 
-              {/* Search Bar - diperbaiki dan lebih lebar */}
+              {/* Search Bar */}
               <div className="flex-1 max-w-2xl hidden md:block">
                 <form onSubmit={handleSearch} className="relative">
                   <input
@@ -74,7 +75,7 @@ const Header = ({ activeTab = 'home' }) => {
               </div>
             </div>
 
-            {/* Right Side Icons (kanan) */}
+            {/* Right Side Icons */}
             <div className="flex items-center space-x-6">
               {/* Cart */}
               <div className="flex items-center space-x-2 cursor-pointer hover:text-pink-500 transition-colors">
@@ -95,7 +96,7 @@ const Header = ({ activeTab = 'home' }) => {
                   <User className="w-6 h-6 text-gray-600" />
                   <span className="text-gray-600 hidden sm:block font-medium">Hi, {currentUser.name}</span>
                   
-                  {/* Dropdown Menu */}
+                  {/* Dropdown */}
                   <div className="absolute top-full right-0 mt-2 w-48 bg-white border border-gray-200 rounded-xl shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
                     <div className="p-4 border-b border-gray-200">
                       <p className="font-medium text-gray-900">{currentUser.name}</p>
@@ -126,61 +127,62 @@ const Header = ({ activeTab = 'home' }) => {
           <div className="border-t border-gray-200">
             <div className="flex items-center justify-between py-3">
               <div className="flex items-center space-x-8">
-                <a 
-                  href="/home" 
-                  className={`font-medium transition-colors ${
-                    activeTab === 'home' ? 'text-pink-500 border-b-2 border-pink-500 pb-1' : 'text-gray-700 hover:text-pink-500'
-                  }`}
+                <NavLink 
+                  to="/home"
+                  className={({ isActive }) =>
+                    `font-medium transition-colors ${
+                      isActive ? 'text-pink-500 border-b-2 border-pink-500 pb-1' : 'text-gray-700 hover:text-pink-500'
+                    }`
+                  }
                 >
                   Home
-                </a>
-                <a 
-                  href="/product" 
-                  className={`font-medium transition-colors ${
-                    activeTab === 'produk' ? 'text-pink-500 border-b-2 border-pink-500 pb-1' : 'text-gray-700 hover:text-pink-500'
-                  }`}
+                </NavLink>
+
+                <NavLink 
+                  to="/product"
+                  className={({ isActive }) =>
+                    `font-medium transition-colors ${
+                      isActive ? 'text-pink-500 border-b-2 border-pink-500 pb-1' : 'text-gray-700 hover:text-pink-500'
+                    }`
+                  }
                 >
                   Produk
-                </a>
-                <a 
-                  href="/riwayat" 
-                  className={`font-medium transition-colors ${
-                    activeTab === 'riwayat' ? 'text-pink-500 border-b-2 border-pink-500 pb-1' : 'text-gray-700 hover:text-pink-500'
-                  }`}
+                </NavLink>
+
+                <NavLink 
+                  to="/riwayat"
+                  className={({ isActive }) =>
+                    `font-medium transition-colors ${
+                      isActive ? 'text-pink-500 border-b-2 border-pink-500 pb-1' : 'text-gray-700 hover:text-pink-500'
+                    }`
+                  }
                 >
                   Riwayat
-                </a>
+                </NavLink>
 
-                <a 
-                  href="/cart" 
-                  className={`font-medium transition-colors ${
-                    activeTab === 'cart' ? 'text-pink-500 border-b-2 border-pink-500 pb-1' : 'text-gray-700 hover:text-pink-500'
-                  }`}
+                <NavLink 
+                  to="/cart"
+                  className={({ isActive }) =>
+                    `font-medium transition-colors ${
+                      isActive ? 'text-pink-500 border-b-2 border-pink-500 pb-1' : 'text-gray-700 hover:text-pink-500'
+                    }`
+                  }
                 >
                   Suka
-                </a>
+                </NavLink>
 
-                <a 
-                  href="/checkout" 
-                  className={`font-medium transition-colors ${
-                    activeTab === 'checkout' ? 'text-pink-500 border-b-2 border-pink-500 pb-1' : 'text-gray-700 hover:text-pink-500'
-                  }`}
+                <NavLink 
+                  to="/checkout"
+                  className={({ isActive }) =>
+                    `font-medium transition-colors ${
+                      isActive ? 'text-pink-500 border-b-2 border-pink-500 pb-1' : 'text-gray-700 hover:text-pink-500'
+                    }`
+                  }
                 >
                   Checkout
-                </a>
-
-                {/* <a 
-                  href="/profil" 
-                  className={`font-medium transition-colors ${
-                    activeTab === 'profil' ? 'text-pink-500 border-b-2 border-pink-500 pb-1' : 'text-gray-700 hover:text-pink-500'
-                  }`}
-                >
-                  Akun
-                </a> */}
-
+                </NavLink>
               </div>
 
-              
               <div className="flex items-center space-x-2 text-gray-600 text-sm">
                 <MapPin className="w-4 h-4" />
                 <span className="hidden sm:block">Delivery:</span>
