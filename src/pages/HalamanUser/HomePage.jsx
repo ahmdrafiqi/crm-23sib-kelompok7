@@ -74,6 +74,45 @@ const HomePage = ({ onNavigate }) => {
       image: '/src/assets/gambarUser/skintific.png', // Sama semua
       stock: 'Segera habis',
       badge: 'SALE'
+    },
+    {
+      id: 6,
+      name: 'SKIN1004 Madagascar Centella Light Cleansing Oil',
+      brand: 'SKIN1004',
+      price: 145000,
+      originalPrice: 629000,
+      discount: 77,
+      rating: 4.8,
+      reviews: 934,
+      image: '/src/assets/gambarUser/skintific.png', // Sama semua
+      stock: 'Segera habis',
+      badge: 'SALE'
+    },
+    {
+      id: 7,
+      name: 'SKIN1004 Madagascar Centella Light Cleansing Oil',
+      brand: 'SKIN1004',
+      price: 145000,
+      originalPrice: 629000,
+      discount: 77,
+      rating: 4.8,
+      reviews: 934,
+      image: '/src/assets/gambarUser/skintific.png', // Sama semua
+      stock: 'Segera habis',
+      badge: 'SALE'
+    },
+    {
+      id: 8,
+      name: 'SKIN1004 Madagascar Centella Light Cleansing Oil',
+      brand: 'SKIN1004',
+      price: 145000,
+      originalPrice: 629000,
+      discount: 77,
+      rating: 4.8,
+      reviews: 934,
+      image: '/src/assets/gambarUser/skintific.png', // Sama semua
+      stock: 'Segera habis',
+      badge: 'SALE'
     }
   ];
 
@@ -200,7 +239,7 @@ const HomePage = ({ onNavigate }) => {
 
         {/* Flash Sale Products */}
         <div className="bg-gradient-to-b from-blue-50 to-blue-100 rounded-xl p-6">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-8 gap-4">
             {flashSaleProducts.map((product) => (
               <div key={product.id} className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
                 <div className="relative">
