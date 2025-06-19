@@ -133,8 +133,7 @@ const tiers = [
 
 const DetailMember = () => {
   return (
-    <UserLayout>
-      {/* Full‑screen wrapper */}
+  
       <div className="w-full min-h-screen p-4 md:p-6 lg:p-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {tiers.map((t) => (
@@ -181,7 +180,7 @@ const DetailMember = () => {
           ))}
         </div>
       </div>
-    </UserLayout>
+
   );
 };
 

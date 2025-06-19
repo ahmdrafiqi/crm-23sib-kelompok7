@@ -1,9 +1,6 @@
-// src/pages/HalamanUser/ProdukPage.jsx
 import React, { useState, useEffect } from 'react';
-import { Filter, ChevronDown, Heart, Star, ShoppingCart, Grid, List } from 'lucide-react';
+import { Filter, ChevronDown, Heart, Star, ShoppingCart, Grid, List, Tag } from 'lucide-react';
 import ProductCard from '../../components/HalamanUser/ProductCard';
-
-
 
 const ProdukPage = ({ onNavigate }) => {
   const [products, setProducts] = useState([]);
@@ -13,8 +10,7 @@ const ProdukPage = ({ onNavigate }) => {
   const [viewMode, setViewMode] = useState('grid');
   const [currentUser, setCurrentUser] = useState(null);
 
-  // Simulasi data produk dengan gambar yang sama
-  const allProducts = [
+   const allProducts = [
     {
       id: 1,
       name: 'SKINTIFIC Aqua Light Daily Sunscreen SPF 35',
@@ -151,178 +147,117 @@ const ProdukPage = ({ onNavigate }) => {
       ? products 
       : products.filter(product => product.category === selectedCategory);
 
-    // Sorting
     filtered.sort((a, b) => {
       switch (sortBy) {
-        case 'price-low':
-          return a.price - b.price;
-        case 'price-high':
-          return b.price - a.price;
-        case 'rating':
-          return b.rating - a.rating;
-        case 'newest':
-          return b.isNew - a.isNew;
-        default:
-          return a.name.localeCompare(b.name);
+        case 'price-low': return a.price - b.price;
+        case 'price-high': return b.price - a.price;
+        case 'rating': return b.rating - a.rating;
+        case 'newest': return b.isNew - a.isNew;
+        default: return a.name.localeCompare(b.name);
       }
     });
 
     setFilteredProducts(filtered);
   }, [selectedCategory, sortBy, products]);
 
-  const formatPrice = (price) => {
-    return new Intl.NumberFormat('id-ID').format(price);
-  };
-
-  const addToCart = (productId) => {
-    if (!currentUser) {
-      alert('Silakan login terlebih dahulu');
-      return;
-    }
-
-    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-    const existingItem = cart.find(item => item.userId === currentUser.id && item.productId === productId);
-
-    if (existingItem) {
-      existingItem.quantity += 1;
-      existingItem.updatedAt = new Date().toISOString();
-    } else {
-      cart.push({
-        id: Date.now(),
-        userId: currentUser.id,
-        productId,
-        quantity: 1,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString()
-      });
-    }
-
-    localStorage.setItem('cart', JSON.stringify(cart));
-    alert('Produk berhasil ditambahkan ke keranjang!');
-  };
-
-  // Komponen untuk render gambar dengan fallback
-  const ProductImage = ({ src, alt, className }) => {
-    const [imageError, setImageError] = useState(false);
-    
-    if (imageError) {
-      // Fallback ke emoji jika gambar gagal load
-      return (
-        <div className={`${className} bg-gray-100 flex items-center justify-center`}>
-          <span className="text-4xl">💄</span>
-        </div>
-      );
-    }
-    
-    return (
-      <img 
-        src={src} 
-        alt={alt} 
-        className={`${className} object-contain p-4 bg-white`}
-        onError={() => setImageError(true)}
-        loading="lazy"
-      />
-    );
-  };
+  const formatPrice = (price) => new Intl.NumberFormat('id-ID').format(price);
 
   return (
-    <>
-    
-    
-        {/* Page Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Produk Kecantikan</h1>
-          <p className="text-gray-600">Temukan produk kecantikan terbaik untuk kebutuhan Anda</p>
-        </div>
+    <div className="px-4 sm:px-6 lg:px-8 py-6">
+      {/* Header */}
+      <div className="mb-10 text-center">
+        <h1 className="text-4xl font-bold text-gray-900 mb-2 tracking-tight">Produk Kecantikan</h1>
+        <p className="text-gray-600 text-sm">Temukan produk skincare, makeup, dan bodycare terbaik untuk kamu ✨</p>
+      </div>
 
-        {/* Filters */}
-        <div className="bg-white rounded-xl shadow-sm p-6 mb-8">
-          <div className="flex flex-col lg:flex-row gap-6">
-            {/* Category Filter */}
-            <div className="flex-1">
-              <label className="block text-sm font-medium text-gray-700 mb-3">Kategori</label>
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-                {categories.map((category) => (
-                  <button
-                    key={category.value}
-                    onClick={() => setSelectedCategory(category.value)}
-                    className={`p-3 rounded-lg border-2 transition-all text-sm font-medium ${
+      {/* Filter & Sort */}
+      <div className="bg-white rounded-xl shadow-sm p-6 mb-10 border border-gray-100">
+        <div className="flex flex-col lg:flex-row gap-6 justify-between">
+          {/* Kategori */}
+          <div className="flex-1">
+            <h2 className="text-sm font-semibold text-gray-700 mb-3">Kategori</h2>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+              {categories.map((category) => (
+                <button
+                  key={category.value}
+                  onClick={() => setSelectedCategory(category.value)}
+                  className={`flex items-center justify-between px-4 py-2 rounded-lg border-2 text-sm font-medium transition-all
+                    ${
                       selectedCategory === category.value
-                        ? 'border-pink-500 bg-pink-50 text-pink-700'
-                        : 'border-gray-200 hover:border-pink-300 text-gray-700'
+                        ? 'bg-pink-100 border-pink-500 text-pink-700'
+                        : 'border-gray-200 text-gray-700 hover:border-pink-300'
                     }`}
-                  >
+                >
+                  <span className="flex items-center gap-2">
+                    <Tag className="w-4 h-4" />
                     {category.label}
-                    <span className="block text-xs text-gray-500 mt-1">({category.count})</span>
-                  </button>
-                ))}
-              </div>
+                  </span>
+                  <span className="text-xs text-gray-500">({category.count})</span>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Sorting + View Mode */}
+          <div className="lg:w-80 space-y-4">
+            {/* Sorting */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Urutkan</label>
+              <select
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value)}
+                className="w-full p-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500"
+              >
+                <option value="name">Nama A-Z</option>
+                <option value="price-low">Harga Terendah</option>
+                <option value="price-high">Harga Tertinggi</option>
+                <option value="rating">Rating Tertinggi</option>
+                <option value="newest">Produk Terbaru</option>
+              </select>
             </div>
 
-            {/* Sort & View Options */}
-            <div className="lg:w-80">
-              <div className="flex gap-4">
-                {/* Sort */}
-                <div className="flex-1">
-                  <label className="block text-sm font-medium text-gray-700 mb-3">Urutkan</label>
-                  <select
-                    value={sortBy}
-                    onChange={(e) => setSortBy(e.target.value)}
-                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500"
-                  >
-                    <option value="name">Nama A-Z</option>
-                    <option value="price-low">Harga Terendah</option>
-                    <option value="price-high">Harga Tertinggi</option>
-                    <option value="rating">Rating Tertinggi</option>
-                    <option value="newest">Terbaru</option>
-                  </select>
-                </div>
-
-                {/* View Mode */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-3">Tampilan</label>
-                  <div className="flex border border-gray-300 rounded-lg">
-                    <button
-                      onClick={() => setViewMode('grid')}
-                      className={`p-3 ${viewMode === 'grid' ? 'bg-pink-500 text-white' : 'text-gray-600 hover:bg-gray-50'}`}
-                    >
-                      <Grid className="w-4 h-4" />
-                    </button>
-                    <button
-                      onClick={() => setViewMode('list')}
-                      className={`p-3 ${viewMode === 'list' ? 'bg-pink-500 text-white' : 'text-gray-600 hover:bg-gray-50'}`}
-                    >
-                      <List className="w-4 h-4" />
-                    </button>
-                  </div>
-                </div>
+            {/* Tampilan grid/list */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Tampilan</label>
+              <div className="inline-flex border border-gray-300 rounded-lg overflow-hidden">
+                <button
+                  onClick={() => setViewMode('grid')}
+                  className={`p-2 ${viewMode === 'grid' ? 'bg-pink-500 text-white' : 'hover:bg-gray-100 text-gray-600'}`}
+                >
+                  <Grid className="w-4 h-4" />
+                </button>
+                <button
+                  onClick={() => setViewMode('list')}
+                  className={`p-2 ${viewMode === 'list' ? 'bg-pink-500 text-white' : 'hover:bg-gray-100 text-gray-600'}`}
+                >
+                  <List className="w-4 h-4" />
+                </button>
               </div>
             </div>
           </div>
         </div>
+      </div>
 
-        {/* Products Grid */}
-        <div className={`grid gap-6 ${
-          viewMode === 'grid' 
-            ? 'grid-cols-2 md:grid-cols-3 lg:grid-cols-4' 
-            : 'grid-cols-1'
-        }`}>
-          {filteredProducts.map((product) => (
-            <ProductCard key={product.id} product={product} formatPrice={formatPrice} />
-          ))}
+      {/* Produk */}
+      <div className={`grid gap-6 ${
+        viewMode === 'grid'
+          ? 'grid-cols-2 md:grid-cols-3 lg:grid-cols-4'
+          : 'grid-cols-1'
+      }`}>
+        {filteredProducts.map((product) => (
+          <ProductCard key={product.id} product={product} formatPrice={formatPrice} />
+        ))}
+      </div>
+
+      {/* Produk Tidak Ditemukan */}
+      {filteredProducts.length === 0 && (
+        <div className="text-center py-20">
+          <div className="text-gray-400 text-6xl mb-4">🔍</div>
+          <h3 className="text-xl font-semibold text-gray-900 mb-2">Produk tidak ditemukan</h3>
+          <p className="text-gray-600">Coba ubah filter atau kata kunci pencarian Anda</p>
         </div>
-
-        {/* No Products Found */}
-        {filteredProducts.length === 0 && (
-          <div className="text-center py-16">
-            <div className="text-gray-400 text-6xl mb-4">🔍</div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">Produk tidak ditemukan</h3>
-            <p className="text-gray-600">Coba ubah filter atau kata kunci pencarian Anda</p>
-          </div>
-        )}
-      
-   
-    </>
+      )}
+    </div>
   );
 };
 

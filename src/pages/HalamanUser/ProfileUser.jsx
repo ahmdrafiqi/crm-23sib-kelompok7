@@ -18,7 +18,6 @@ const ProfileUser = () => {
 
   return (
     <>
-    <Header />
     <div className="bg-white text-gray-800">
       {/* Header */}
       <header className="bg-white shadow-md p-4 flex justify-between items-center">
@@ -146,7 +145,6 @@ const ProfileUser = () => {
         </div>
       </section>
     </div>
-    <Footer />
     </>
   );
 };
