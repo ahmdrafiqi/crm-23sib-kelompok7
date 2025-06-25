@@ -39,7 +39,7 @@ const HomePage = ({ onNavigate }) => {
     },
     {
       id: 3,
-      name: 'DERMA ANGEL Acne Patch Mix 18',
+      name: 'DERMA ANGEL Acne Patch Mix 18 DERMA ANGEL Acne Patch Mix 18',
       brand: 'DERMA ANGEL',
       price: 34500,
       originalPrice: 46000,
@@ -52,7 +52,7 @@ const HomePage = ({ onNavigate }) => {
     },
     {
       id: 4,
-      name: 'PURE PAW PAW Ointment - Mini Size',
+      name: 'PURE PAW PAW Ointment - Mini Size PURE PAW PAW Ointment - Mini Size',
       brand: 'PURE PAW PAW',
       price: 46665,
       originalPrice: 54900,
