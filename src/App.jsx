@@ -1,17 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 
-import Promo from "./pages/SystemPromo"
-import MainLayout from './components/MainLayout'
-import Dashboard from './pages/Dashboard'
-import Penjualan from './pages/Penjualan'
-import Pelanggan from './pages/Pelanggan'
-import Masuk from './pages/Masuk'
-import Daftar from './pages/Daftar'
-import Produk from './pages/Produk'
-import CekPesanan from './pages/Pesanan'
-import FAQ from './pages/FAQ'
+// User Pages
 import ProfileUser from './pages/HalamanUser/ProfileUser'
-import HomePage from "./pages/HalamanUser/Homepage";
 import Member from "./pages/HalamanUser/Member";
 import ProdukPage from './pages/HalamanUser/ProdukPage'
 import RiwayatPage from './pages/HalamanUser/RiwayatPage';
@@ -19,41 +9,76 @@ import CartPage from "./pages/HalamanUser/CartPage";
 import CheckoutPage from "./pages/HalamanUser/CheckoutPage";
 import ProductDetail from "./pages/HalamanUser/DetailProduct";
 import UserLayout from "./components/HalamanUser/UserLayout";
-import ProfilePage from "./pages/HalamanUser/ProfilePage";
 import DetailMember from "./pages/HalamanUser/DetailMember";
+import HomePage from "./pages/HalamanUser/HomePage";
+
+// Admin Pages & Layout
+import AdminLayout from "./components/Admin/AdminLayout";
+import DashboardPage from "./pages/Admin/DashboardPage";
+import CustomerManagement from "./pages/Admin/CustomerManagement";
+import OrderManagement from "./pages/Admin/OrderManagement";
+import ProductManagement from "./pages/Admin/ProductManagement";
+import EmailCampaigns from "./pages/Admin/EmailCampaigns";
+import AddCustomer from "./pages/Admin/AddCustomer";
+import CustomerSegmentation from "./pages/Admin/CustomerSegmentation";
+import SalesReports from "./pages/Admin/SalesReport";
+import LoyaltyProgram from "./pages/Admin/LoyaltyProgram";
+import Communications from "./pages/Admin/Communication";
+import DataManagementBPMN from "./pages/Admin/BPMN";
+// Import other admin pages as you create them
 
 function App() {
   return (
     <Routes>
-      {/* Admin Pages */}
-      <Route path="/admin" element={<MainLayout />}>
-        <Route index element={<Dashboard />} /> {/* /admin */}
-        <Route path="pelanggan" element={<Pelanggan />} />
-        <Route path="penjualan" element={<Penjualan />} />
-        <Route path="promo" element={<Promo />} />
-        <Route path="produk" element={<Produk />} />
-        <Route path="pesanan" element={<CekPesanan />} />
-        <Route path="faq" element={<FAQ />} />
-      </Route>
-
-      {/* Auth Pages */}
-      <Route path="/masuk" element={<Masuk />} />
-      <Route path="/daftar" element={<Daftar />} />
-
-      {/* User Pages */}
+      {/* User Routes */}
       <Route path="/" element={<UserLayout />}>
-        <Route index element={<HomePage />} /> {/* / */}
-        <Route path="home" element={<HomePage />} />
-        <Route path="member" element={<Member />} />
-        <Route path="/detail-member" element={<DetailMember />} /> 
-        <Route path="product" element={<ProdukPage />} />
-        <Route path="product/:id" element={<ProductDetail />} />
-        <Route path="riwayat" element={<RiwayatPage />} />
-        <Route path="cart" element={<CartPage />} />
-        <Route path="checkout" element={<CheckoutPage />} />
-        <Route path="profil" element={<ProfileUser />} />
-        
+        <Route index element={<HomePage />} />
+        <Route path="/home" element={<HomePage/>} />
+        <Route path="/member" element={<Member />} />
+        <Route path="/detail-member" element={<DetailMember />} />
+        <Route path="/product" element={<ProdukPage />} />
+        <Route path="/product/:id" element={<ProductDetail />} />
+        <Route path="/riwayat" element={<RiwayatPage />} />
+        <Route path="/cart" element={<CartPage />} />
+        <Route path="/checkout" element={<CheckoutPage />} />
+        <Route path="/profil" element={<ProfileUser />} />
       </Route>
+
+      {/* Admin Routes with Layout */}
+      <Route path="/admin" element={<AdminLayout />}>
+        <Route path="dashboard" element={<DashboardPage />} />
+        
+        {/* Customer Management */}
+        <Route path="customers" element={<CustomerManagement />} />
+        <Route path="customers/add" element={<AddCustomer/>} />
+        <Route path="customers/segmentation" element={<CustomerSegmentation/>} />
+        
+        {/* Sales Force */}
+        <Route path="orders" element={<OrderManagement />} />
+        <Route path="products" element={<ProductManagement />} />
+        <Route path="sales-reports" element={<SalesReports/>} />
+        
+        {/* Marketing */}
+        <Route path="campaigns" element={<EmailCampaigns />} />
+        <Route path="loyalty" element={<LoyaltyProgram/>} />
+        <Route path="communications" element={<Communications/>} />
+        
+        {/* Customer Service */}
+        <Route path="tickets" element={<div>Support Tickets - Coming Soon</div>} />
+        <Route path="knowledge" element={<div>Knowledge Base - Coming Soon</div>} />
+        
+        {/* Analytics */}
+        <Route path="analytics/customers" element={<div>Customer Analytics - Coming Soon</div>} />
+        <Route path="analytics/sales" element={<div>Sales Analytics - Coming Soon</div>} />
+        <Route path="analytics/campaigns" element={<div>Campaign Analytics - Coming Soon</div>} />
+        
+        {/* Settings */}
+        <Route path="settings" element={<div>Settings - Coming Soon</div>} />
+      </Route>
+
+      <Route path="/bpmn" element={<DataManagementBPMN />} />
+
+
     </Routes>
   );
 }
