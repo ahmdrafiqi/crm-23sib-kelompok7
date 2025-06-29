@@ -7,7 +7,6 @@ import ProdukPage from "./pages/HalamanUser/ProdukPage";
 import RiwayatPage from "./pages/HalamanUser/RiwayatPage";
 import CartPage from "./pages/HalamanUser/CartPage";
 import CheckoutPage from "./pages/HalamanUser/CheckoutPage";
-import ProductDetail from "./pages/HalamanUser/DetailProduct";
 import UserLayout from "./components/HalamanUser/UserLayout";
 import DetailMember from "./pages/HalamanUser/DetailMember";
 import HomePage from "./pages/HalamanUser/HomePage";
@@ -27,6 +26,7 @@ import Communications from "./pages/Admin/Communication";
 import DataManagementBPMN from "./pages/Admin/BPMN";
 import UserManagement from "./pages/Admin/UserManagement";
 import AddProduct from "./pages/Admin/AddProduct";
+import ProductDetailPage from "./pages/HalamanUser/DetailProductPage";
 // Import other admin pages as you create them
 
 function App() {
@@ -39,7 +39,7 @@ function App() {
         <Route path="/member" element={<Member />} />
         <Route path="/detail-member" element={<DetailMember />} />
         <Route path="/product" element={<ProdukPage />} />
-        <Route path="/product/:id" element={<ProductDetail />} />
+        <Route path="/product/:id" element={<ProductDetailPage />} />
         <Route path="/riwayat" element={<RiwayatPage />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/checkout" element={<CheckoutPage />} />

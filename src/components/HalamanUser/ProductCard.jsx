@@ -27,7 +27,7 @@ const ProductImage = ({ src, alt, className }) => {
 
 const ProductCard = ({ product, formatPrice }) => {
   return (
-    <Link to={`/produk/${product.id}`}>
+    <Link to={`/product/${product.id}`}>
   <div className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow h-full flex flex-col">
     <div className="relative">
       <div className="aspect-square">
