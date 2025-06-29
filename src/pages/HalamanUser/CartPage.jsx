@@ -74,7 +74,7 @@ const CartPage = () => {
     const cart = JSON.parse(localStorage.getItem('cart') || '[]');
     const updatedCart = cart.filter(item => 
       !(item.userId === currentUser.id && item.productId === productId)
-    );
+    ); 
     localStorage.setItem('cart', JSON.stringify(updatedCart));
     loadCart(currentUser.id);
   };

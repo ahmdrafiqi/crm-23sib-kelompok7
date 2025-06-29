@@ -1,10 +1,10 @@
 import { Routes, Route } from "react-router-dom";
 
 // User Pages
-import ProfileUser from './pages/HalamanUser/ProfileUser'
+import ProfileUser from "./pages/HalamanUser/ProfileUser";
 import Member from "./pages/HalamanUser/Member";
-import ProdukPage from './pages/HalamanUser/ProdukPage'
-import RiwayatPage from './pages/HalamanUser/RiwayatPage';
+import ProdukPage from "./pages/HalamanUser/ProdukPage";
+import RiwayatPage from "./pages/HalamanUser/RiwayatPage";
 import CartPage from "./pages/HalamanUser/CartPage";
 import CheckoutPage from "./pages/HalamanUser/CheckoutPage";
 import ProductDetail from "./pages/HalamanUser/DetailProduct";
@@ -25,6 +25,8 @@ import SalesReports from "./pages/Admin/SalesReport";
 import LoyaltyProgram from "./pages/Admin/LoyaltyProgram";
 import Communications from "./pages/Admin/Communication";
 import DataManagementBPMN from "./pages/Admin/BPMN";
+import UserManagement from "./pages/Admin/UserManagement";
+import AddProduct from "./pages/Admin/AddProduct";
 // Import other admin pages as you create them
 
 function App() {
@@ -33,7 +35,7 @@ function App() {
       {/* User Routes */}
       <Route path="/" element={<UserLayout />}>
         <Route index element={<HomePage />} />
-        <Route path="/home" element={<HomePage/>} />
+        <Route path="/home" element={<HomePage />} />
         <Route path="/member" element={<Member />} />
         <Route path="/detail-member" element={<DetailMember />} />
         <Route path="/product" element={<ProdukPage />} />
@@ -47,38 +49,58 @@ function App() {
       {/* Admin Routes with Layout */}
       <Route path="/admin" element={<AdminLayout />}>
         <Route path="dashboard" element={<DashboardPage />} />
-        
+
         {/* Customer Management */}
         <Route path="customers" element={<CustomerManagement />} />
-        <Route path="customers/add" element={<AddCustomer/>} />
-        <Route path="customers/segmentation" element={<CustomerSegmentation/>} />
-        
+        <Route path="customers/add" element={<AddCustomer />} />
+        <Route
+          path="customers/segmentation"
+          element={<CustomerSegmentation />}
+        />
+
+        {/* User Management */}
+        <Route path="user" element={<UserManagement />} />
+
         {/* Sales Force */}
         <Route path="orders" element={<OrderManagement />} />
         <Route path="products" element={<ProductManagement />} />
-        <Route path="sales-reports" element={<SalesReports/>} />
-        
+        <Route path="products/add" element={<AddProduct />} />
+        <Route path="sales-reports" element={<SalesReports />} />
+
         {/* Marketing */}
         <Route path="campaigns" element={<EmailCampaigns />} />
-        <Route path="loyalty" element={<LoyaltyProgram/>} />
-        <Route path="communications" element={<Communications/>} />
-        
+        <Route path="loyalty" element={<LoyaltyProgram />} />
+        <Route path="communications" element={<Communications />} />
+
         {/* Customer Service */}
-        <Route path="tickets" element={<div>Support Tickets - Coming Soon</div>} />
-        <Route path="knowledge" element={<div>Knowledge Base - Coming Soon</div>} />
-        
+        <Route
+          path="tickets"
+          element={<div>Support Tickets - Coming Soon</div>}
+        />
+        <Route
+          path="knowledge"
+          element={<div>Knowledge Base - Coming Soon</div>}
+        />
+
         {/* Analytics */}
-        <Route path="analytics/customers" element={<div>Customer Analytics - Coming Soon</div>} />
-        <Route path="analytics/sales" element={<div>Sales Analytics - Coming Soon</div>} />
-        <Route path="analytics/campaigns" element={<div>Campaign Analytics - Coming Soon</div>} />
-        
+        <Route
+          path="analytics/customers"
+          element={<div>Customer Analytics - Coming Soon</div>}
+        />
+        <Route
+          path="analytics/sales"
+          element={<div>Sales Analytics - Coming Soon</div>}
+        />
+        <Route
+          path="analytics/campaigns"
+          element={<div>Campaign Analytics - Coming Soon</div>}
+        />
+
         {/* Settings */}
         <Route path="settings" element={<div>Settings - Coming Soon</div>} />
       </Route>
 
       <Route path="/bpmn" element={<DataManagementBPMN />} />
-
-
     </Routes>
   );
 }

@@ -11,7 +11,8 @@ import {
   PieChart,
   Settings,
   ChevronDown,
-  ChevronRight
+  ChevronRight,
+  User
 } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 
@@ -33,6 +34,13 @@ const AdminSidebar = () => {
       label: 'Dashboard',
       icon: TrendingUp,
       path: '/admin/dashboard',
+      hasSubmenu: false
+    },
+    {
+      key: 'user',
+      label: 'Users',
+      icon: User,
+      path: '/admin/user',
       hasSubmenu: false
     },
     {
