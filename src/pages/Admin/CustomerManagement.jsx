@@ -1,12 +1,12 @@
+// Versi Bahasa Indonesia + warna segmentasi disesuaikan + tampilkan nama user di Most Orders dan Most Spent
+
 import React, { useState, useEffect } from "react";
 import { supabase } from "../../supabase";
 import { useNavigate } from "react-router-dom";
-
 import {
   Search,
   Filter,
   Plus,
-  MoreVertical,
   Mail,
   Phone,
   Star,
@@ -21,17 +21,26 @@ const CustomerManagement = () => {
   const [filterSegment, setFilterSegment] = useState("all");
 
   const segmentColors = {
-    Bronze: "bg-purple-100 text-purple-700",
-    Silver: "bg-pink-100 text-pink-700",
-    Gold: "bg-blue-100 text-blue-700",
+    Bronze: "bg-yellow-100 text-yellow-700",
+    Silver: "bg-gray-200 text-gray-700",
+    Gold: "bg-amber-200 text-amber-800",
+    VIP: "bg-purple-100 text-purple-700",
+    Loyal: "bg-blue-100 text-blue-700",
+    New: "bg-green-100 text-green-700",
+    Dormant: "bg-red-100 text-red-700",
   };
 
   const [stats, setStats] = useState({
     totalCustomers: 0,
     mostOrders: 0,
+    mostOrdersName: "",
     mostSpent: 0,
+    mostSpentName: "",
     newThisMonth: 0,
   });
+
+  const [customers, setCustomers] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchCustomers = async () => {
@@ -50,7 +59,7 @@ const CustomerManagement = () => {
       `);
 
       if (error) {
-        console.error("Error fetching customers:", error);
+        console.error("Gagal mengambil data pelanggan:", error);
       } else {
         const formatted = data.map((item) => ({
           id: item.id_pelanggan,
@@ -64,11 +73,26 @@ const CustomerManagement = () => {
             ? new Date(item.transaksi_terakhir).toLocaleDateString()
             : "-",
         }));
+
         setCustomers(formatted);
-        // Hitung statistik
+
         const totalCustomers = formatted.length;
-        const mostOrders = Math.max(...formatted.map((c) => c.totalOrders));
-        const mostSpent = Math.max(...formatted.map((c) => c.totalSpent));
+        let mostOrders = 0,
+          mostSpent = 0,
+          mostOrdersName = "",
+          mostSpentName = "";
+
+        formatted.forEach((c) => {
+          if (c.totalOrders > mostOrders) {
+            mostOrders = c.totalOrders;
+            mostOrdersName = c.name;
+          }
+          if (c.totalSpent > mostSpent) {
+            mostSpent = c.totalSpent;
+            mostSpentName = c.name;
+          }
+        });
+
         const now = new Date();
         const newThisMonth = formatted.filter((c) => {
           const date = new Date(c.lastPurchase);
@@ -81,94 +105,89 @@ const CustomerManagement = () => {
         setStats({
           totalCustomers,
           mostOrders,
+          mostOrdersName,
           mostSpent,
+          mostSpentName,
           newThisMonth,
         });
       }
-
       setLoading(false);
     };
 
     fetchCustomers();
   }, []);
 
-  const [customers, setCustomers] = useState([]);
-  const [loading, setLoading] = useState(true);
-
   const filteredCustomers = customers.filter((customer) => {
     const matchesSearch =
       customer.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       customer.email.toLowerCase().includes(searchTerm.toLowerCase());
-
     const matchesFilter =
       filterSegment === "all" || customer.segment === filterSegment;
-
     return matchesSearch && matchesFilter;
   });
 
   const handleDelete = async (id) => {
-    const confirmDelete = window.confirm(
-      "Yakin ingin menghapus pelanggan ini?"
-    );
+    const confirmDelete = confirm("Yakin ingin menghapus pelanggan ini?");
     if (!confirmDelete) return;
 
     const { error } = await supabase
       .from("pelanggan")
       .delete()
       .eq("id_pelanggan", id);
-
     if (error) {
-      console.error("Gagal menghapus pelanggan:", error.message); // tampilkan pesan error
-      alert("Terjadi kesalahan saat menghapus pelanggan: " + error.message);
+      alert("Terjadi kesalahan: " + error.message);
     } else {
       alert("Pelanggan berhasil dihapus.");
-      // Refresh data
       setCustomers((prev) => prev.filter((c) => c.id !== id));
     }
   };
 
   return (
     <main className="flex-1 p-6 bg-gray-50">
-      {/* Header */}
       <div className="mb-6">
         <h1 className="text-2xl font-bold text-gray-800">
-          Customer Management
+          Manajemen Pelanggan
         </h1>
-        <p className="text-gray-600">Manage and track your customer database</p>
+        <p className="text-gray-600">Kelola dan pantau data pelanggan Anda</p>
       </div>
 
-      {/* Stats Cards */}
+      {/* Kartu Statistik */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
         <div className="bg-white rounded-lg p-4 shadow-sm">
-          <p className="text-sm text-gray-600">Total Customers</p>
+          <p className="text-sm text-gray-600">Total Pelanggan</p>
           <p className="text-2xl font-bold text-gray-800">
             {stats.totalCustomers}
           </p>
-          <p className="text-xs text-green-600 mt-1">Up to date</p>
+          <p className="text-xs text-green-600 mt-1">Data terkini</p>
         </div>
         <div className="bg-white rounded-lg p-4 shadow-sm">
-          <p className="text-sm text-gray-600">Most Orders</p>
+          <p className="text-sm text-gray-600">Order Terbanyak</p>
           <p className="text-2xl font-bold text-purple-600">
-            {stats.mostOrders}
+            {stats.mostOrders}{" "}
+            <span className="text-sm text-gray-500">
+              ({stats.mostOrdersName})
+            </span>
           </p>
-          <p className="text-xs text-gray-500 mt-1">Highest order count</p>
+          <p className="text-xs text-gray-500 mt-1">Jumlah order tertinggi</p>
         </div>
         <div className="bg-white rounded-lg p-4 shadow-sm">
-          <p className="text-sm text-gray-600">Most Spent</p>
+          <p className="text-sm text-gray-600">Belanja Tertinggi</p>
           <p className="text-2xl font-bold text-gray-600">
-            Rp {(stats.mostSpent / 1000000).toFixed(1)}Jt
+            Rp {(stats.mostSpent / 1000000).toFixed(1)}Jt{" "}
+            <span className="text-sm text-gray-500">
+              ({stats.mostSpentName})
+            </span>
           </p>
-          <p className="text-xs text-red-600 mt-1">Highest spender</p>
+          <p className="text-xs text-blue-600 mt-1">Pelanggan paling royal</p>
         </div>
         <div className="bg-white rounded-lg p-4 shadow-sm">
-          <p className="text-sm text-gray-600">New This Month</p>
+          <p className="text-sm text-gray-600">Pelanggan Baru Bulan Ini</p>
           <p className="text-2xl font-bold text-blue-600">
             {stats.newThisMonth}
           </p>
-          <p className="text-xs text-gray-500 mt-1">Target: 500</p>
+          <p className="text-xs text-red-500 mt-1">Target: 500</p>
         </div>
       </div>
-
       {/* Actions Bar */}
       <div className="bg-white rounded-xl p-4 shadow-sm mb-6">
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
@@ -178,7 +197,7 @@ const CustomerManagement = () => {
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
               <input
                 type="text"
-                placeholder="Search customers..."
+                placeholder="Cari Pelanggan..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
@@ -193,22 +212,21 @@ const CustomerManagement = () => {
                 onChange={(e) => setFilterSegment(e.target.value)}
                 className="border border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-pink-500"
               >
-                <option value="all">All Segments</option>
-                <option value="VIP">VIP</option>
-                <option value="Loyal">Loyal</option>
-                <option value="New">New</option>
-                <option value="Dormant">Dormant</option>
+                <option value="all">Semua</option>
+                <option value="Gold">Gold</option>
+                <option value="Silver">Silver</option>
+                <option value="Bronze">Bronze</option>
               </select>
             </div>
           </div>
 
           {/* Add Customer Button */}
           <button
-            onClick={() => navigate("add")} // ⬅️ ini arah URL-nya
+            onClick={() => navigate("/admin/customers/add")}
             className="bg-pink-500 text-white px-4 py-2 rounded-lg hover:bg-pink-600 transition-colors flex items-center gap-2"
           >
             <Plus className="w-4 h-4" />
-            Add Customer
+            Tambah Pelanggan
           </button>
         </div>
       </div>
@@ -220,25 +238,25 @@ const CustomerManagement = () => {
             <thead className="bg-gray-50 border-b border-gray-200">
               <tr>
                 <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Customer
+                  Pelanggan
                 </th>
                 <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Contact
+                  Kontak
                 </th>
                 <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Segment
+                  Level
                 </th>
                 <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Total Spent
+                  Total Belanja
                 </th>
                 <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Orders
+                  Total Order
                 </th>
                 <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Last Purchase
+                  Pembelian Terakhir
                 </th>
                 <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Actions
+                  Aksi
                 </th>
               </tr>
             </thead>
@@ -324,13 +342,13 @@ const CustomerManagement = () => {
         {/* Pagination */}
         <div className="px-6 py-4 border-t border-gray-200 flex items-center justify-between">
           <p className="text-sm text-gray-700">
-            Showing <span className="font-medium">1</span> to{" "}
-            <span className="font-medium">5</span> of{" "}
-            <span className="font-medium">12,845</span> results
+            Menampilkan <span className="font-medium">1</span> -{" "}
+            <span className="font-medium">5</span> dari{" "}
+            <span className="font-medium">12,845</span> data
           </p>
           <div className="flex gap-2">
             <button className="px-3 py-1 border border-gray-300 rounded-md text-sm hover:bg-gray-50">
-              Previous
+              Sebelumnya
             </button>
             <button className="px-3 py-1 bg-pink-500 text-white rounded-md text-sm">
               1
@@ -345,7 +363,7 @@ const CustomerManagement = () => {
               ...
             </button>
             <button className="px-3 py-1 border border-gray-300 rounded-md text-sm hover:bg-gray-50">
-              Next
+              Selanjutnya
             </button>
           </div>
         </div>

@@ -53,7 +53,7 @@ const ProductManagement = () => {
     fetchProducts();
   }, []); // ⬅️ useEffect hanya dipanggil sekali saat halaman dimuat
 
-  const categories = ["All", "Makeup", "Skincare", "Bodycare"];
+  const categories = ["Semua Kategori", "Makeup", "Skincare", "Bodycare"];
   const totalProducts = products.length;
   const lowStockCount = products.filter((p) => p.stockStatus === "low").length;
   const [stockFilter, setStockFilter] = useState("all");
@@ -78,23 +78,23 @@ const ProductManagement = () => {
     navigate(`/admin/products/edit/${id}`);
   };
 
-const handleDelete = async (id) => {
-  const confirmDelete = confirm("Yakin ingin menghapus pelanggan ini?");
-  if (confirmDelete) {
-    const { error } = await supabase
-      .from("pelanggan")
-      .delete()
-      .eq("id_pelanggan", id);
+  const handleDelete = async (id) => {
+    const confirmDelete = confirm("Yakin ingin menghapus pelanggan ini?");
+    if (confirmDelete) {
+      const { error } = await supabase
+        .from("pelanggan")
+        .delete()
+        .eq("id_pelanggan", id);
 
-    if (error) {
-      console.error("Gagal hapus pelanggan:", error.message);
-      alert("Terjadi kesalahan saat menghapus pelanggan.");
-    } else {
-      setCustomers((prev) => prev.filter((c) => c.id !== id));
-      alert("Pelanggan berhasil dihapus.");
+      if (error) {
+        console.error("Gagal hapus pelanggan:", error.message);
+        alert("Terjadi kesalahan saat menghapus pelanggan.");
+      } else {
+        setCustomers((prev) => prev.filter((c) => c.id !== id));
+        alert("Pelanggan berhasil dihapus.");
+      }
     }
-  }
-};
+  };
 
   const filteredProducts = products.filter((product) => {
     const matchesSearch =
@@ -115,9 +115,9 @@ const handleDelete = async (id) => {
     <main className="flex-1 p-6 bg-gray-50">
       {/* Header */}
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-gray-800">Product Management</h1>
+        <h1 className="text-2xl font-bold text-gray-800">Manajemen Produk</h1>
         <p className="text-gray-600">
-          Manage your product catalog and inventory
+          Kelola daftar produk dan persediaan barang
         </p>
       </div>
 
@@ -126,7 +126,7 @@ const handleDelete = async (id) => {
         <div className="bg-white rounded-lg p-4 shadow-sm">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-gray-600">Total Products</p>
+              <p className="text-sm text-gray-600">Total Produk</p>
               <p className="text-2xl font-bold text-gray-800">
                 {products.length > 0 ? totalProducts : "Loading..."}
               </p>
@@ -137,7 +137,7 @@ const handleDelete = async (id) => {
         <div className="bg-white rounded-lg p-4 shadow-sm">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-gray-600">Low Stock Alert</p>
+              <p className="text-sm text-gray-600">Peringatan Stok Menipis</p>
               <p className="text-2xl font-bold text-yellow-600">
                 {products.length > 0 ? lowStockCount : "Loading..."}
               </p>
@@ -148,7 +148,7 @@ const handleDelete = async (id) => {
         <div className="bg-white rounded-lg p-4 shadow-sm">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-gray-600">Out of Stock</p>
+              <p className="text-sm text-gray-600">habis</p>
               <p className="text-2xl font-bold text-red-600">
                 {products.length > 0 ? outOfStockCount : "Loading..."}
               </p>
@@ -159,9 +159,9 @@ const handleDelete = async (id) => {
         <div className="bg-white rounded-lg p-4 shadow-sm">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-gray-600">Inventory Value</p>
+              <p className="text-sm text-gray-600">Nilai Inventaris</p>
               <p className="text-2xl font-bold text-green-600">
-                Rp {(totalValue / 1000000).toFixed(1)}M
+                Rp {(totalValue / 1000000).toFixed(1)}Jt
               </p>
             </div>
             <TrendingUp className="w-8 h-8 text-green-500" />
@@ -173,7 +173,7 @@ const handleDelete = async (id) => {
       <div className="bg-gradient-to-r from-pink-50 to-purple-50 rounded-xl p-4 mb-6">
         <h3 className="text-sm font-semibold text-gray-700 mb-3 flex items-center">
           <Star className="w-4 h-4 text-yellow-500 mr-2" />
-          Top Selling Products
+          Produk Terlaris
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {bestSellers.map((product, index) => (
@@ -191,7 +191,7 @@ const handleDelete = async (id) => {
                   {product.name}
                 </p>
                 <p className="text-xs text-gray-500">
-                  {product.sales.toLocaleString()} sold
+                  {product.sales.toLocaleString()} Terjual
                 </p>
               </div>
             </div>
@@ -208,7 +208,7 @@ const handleDelete = async (id) => {
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
               <input
                 type="text"
-                placeholder="Search products..."
+                placeholder="Cari Produk..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
@@ -237,10 +237,10 @@ const handleDelete = async (id) => {
               onChange={(e) => setStockFilter(e.target.value)}
               className="border border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-pink-500"
             >
-              <option value="all">All Stock</option>
-              <option value="normal">In Stock</option>
-              <option value="low">Low Stock</option>
-              <option value="out">Out of Stock</option>
+              <option value="all">Semua Stok</option>
+              <option value="normal">Tersedia</option>
+              <option value="low">Stok Menipis</option>
+              <option value="out">Habis</option>
             </select>
           </div>
 
@@ -256,7 +256,7 @@ const handleDelete = async (id) => {
               className="bg-pink-500 text-white px-4 py-2 rounded-lg hover:bg-pink-600 transition-colors flex items-center gap-2"
             >
               <Plus className="w-4 h-4" />
-              Add Product
+              Tambah Produk Baru
             </button>
           </div>
         </div>
@@ -269,28 +269,28 @@ const handleDelete = async (id) => {
             <thead className="bg-gray-50 border-b border-gray-200">
               <tr>
                 <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Product
+                  Produk
                 </th>
                 <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   SKU
                 </th>
                 <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Category
+                  Kategori
                 </th>
                 <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Price
+                  Harga
                 </th>
                 <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Stock
+                  Stok
                 </th>
                 <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Sales
+                  Terjual
                 </th>
                 <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Rating
                 </th>
                 <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Actions
+                  Aksi
                 </th>
               </tr>
             </thead>
@@ -342,7 +342,7 @@ const handleDelete = async (id) => {
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div>
                         <p className="text-sm font-medium text-gray-900">
-                          {product.stock} units
+                          {product.stock} unit
                         </p>
                         <span
                           className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
@@ -403,13 +403,13 @@ const handleDelete = async (id) => {
         {/* Pagination */}
         <div className="px-6 py-4 border-t border-gray-200 flex items-center justify-between">
           <p className="text-sm text-gray-700">
-            Showing <span className="font-medium">1</span> to{" "}
-            <span className="font-medium">{filteredProducts.length}</span> of{" "}
-            <span className="font-medium">{totalProducts}</span> results
+            Menampilkan <span className="font-medium">1</span> -{" "}
+            <span className="font-medium">{filteredProducts.length}</span> dari{" "}
+            <span className="font-medium">{totalProducts}</span> data
           </p>
           <div className="flex gap-2">
             <button className="px-3 py-1 border border-gray-300 rounded-md text-sm hover:bg-gray-50">
-              Previous
+              Sebelumnya
             </button>
             <button className="px-3 py-1 bg-pink-500 text-white rounded-md text-sm">
               1
@@ -421,7 +421,7 @@ const handleDelete = async (id) => {
               3
             </button>
             <button className="px-3 py-1 border border-gray-300 rounded-md text-sm hover:bg-gray-50">
-              Next
+              Selanjutnya
             </button>
           </div>
         </div>

@@ -78,19 +78,18 @@ const SalesReports = () => {
   const growthRate = 15.3; // Dummy growth rate
 
   const reports = [
-    { id: 'overview', name: 'Sales Overview', icon: BarChart3 },
-    { id: 'products', name: 'Product Performance', icon: Package },
-    { id: 'categories', name: 'Category Analysis', icon: PieChartIcon },
-    { id: 'customers', name: 'Customer Analysis', icon: Users },
-    { id: 'payments', name: 'Payment Methods', icon: DollarSign }
+    { id: 'overview', name: 'Ringkasan Penjualan', icon: BarChart3 },
+    { id: 'products', name: 'Performa Produk', icon: Package },
+    { id: 'categories', name: 'Analisis Kategori', icon: PieChartIcon },
+    { id: 'customers', name: 'Analisis Pelanggan', icon: Users },
   ];
 
   return (
     <main className="flex-1 p-6 bg-gray-50">
       {/* Header */}
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-gray-800">Sales Reports</h1>
-        <p className="text-gray-600">Comprehensive sales analytics and performance metrics</p>
+        <h1 className="text-2xl font-bold text-gray-800">Laporan Penjualan</h1>
+        <p className="text-gray-600">Analitik penjualan lengkap dan metrik kinerja</p>
       </div>
 
       {/* Period Selector & Actions */}
@@ -99,7 +98,7 @@ const SalesReports = () => {
           <div className="flex items-center gap-4">
             {/* Period Selector */}
             <div className="flex bg-gray-100 rounded-lg p-1">
-              {['week', 'month', 'quarter', 'year'].map((period) => (
+              {['Minggu', 'Bulan', 'Kuartal', 'Tahun'].map((period) => (
                 <button
                   key={period}
                   onClick={() => setSelectedPeriod(period)}
@@ -117,7 +116,7 @@ const SalesReports = () => {
             {/* Date Range */}
             <div className="flex items-center gap-2 text-sm text-gray-600">
               <Calendar className="w-4 h-4" />
-              <span>June 1 - June 30, 2024</span>
+              <span>1 Juni - 30 Juni, 2024</span>
             </div>
           </div>
 
@@ -129,11 +128,11 @@ const SalesReports = () => {
             </button>
             <button className="px-4 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 flex items-center gap-2">
               <Printer className="w-4 h-4" />
-              Print
+              Cetak
             </button>
             <button className="px-4 py-2 bg-pink-500 text-white rounded-lg hover:bg-pink-600 flex items-center gap-2">
               <Download className="w-4 h-4" />
-              Export
+              Ekspor
             </button>
           </div>
         </div>
@@ -143,35 +142,35 @@ const SalesReports = () => {
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
         <div className="bg-white rounded-lg p-4 shadow-sm">
           <div className="flex items-center justify-between mb-2">
-            <p className="text-sm text-gray-600">Total Revenue</p>
+            <p className="text-sm text-gray-600">Total Pemasukan</p>
             <DollarSign className="w-5 h-5 text-green-500" />
           </div>
           <p className="text-2xl font-bold text-gray-800">
-            Rp {(totalRevenue / 1000000).toFixed(1)}M
+            Rp {(totalRevenue / 1000000).toFixed(1)}Jt
           </p>
           <div className="flex items-center mt-2">
             <TrendingUp className="w-4 h-4 text-green-500 mr-1" />
             <span className="text-sm text-green-500">+{growthRate}%</span>
-            <span className="text-xs text-gray-500 ml-1">vs last month</span>
+            <span className="text-xs text-gray-500 ml-1">vs bulan lalu</span>
           </div>
         </div>
 
         <div className="bg-white rounded-lg p-4 shadow-sm">
           <div className="flex items-center justify-between mb-2">
-            <p className="text-sm text-gray-600">Total Orders</p>
+            <p className="text-sm text-gray-600">Total Pesanan</p>
             <ShoppingBag className="w-5 h-5 text-blue-500" />
           </div>
           <p className="text-2xl font-bold text-gray-800">{totalOrders}</p>
           <div className="flex items-center mt-2">
             <TrendingUp className="w-4 h-4 text-green-500 mr-1" />
             <span className="text-sm text-green-500">+12%</span>
-            <span className="text-xs text-gray-500 ml-1">vs last month</span>
+            <span className="text-xs text-gray-500 ml-1">vs bulan lalu</span>
           </div>
         </div>
 
         <div className="bg-white rounded-lg p-4 shadow-sm">
           <div className="flex items-center justify-between mb-2">
-            <p className="text-sm text-gray-600">Avg Order Value</p>
+            <p className="text-sm text-gray-600">Rata-rata Nilai Pesanan</p>
             <BarChart3 className="w-5 h-5 text-purple-500" />
           </div>
           <p className="text-2xl font-bold text-gray-800">
@@ -180,20 +179,20 @@ const SalesReports = () => {
           <div className="flex items-center mt-2">
             <TrendingDown className="w-4 h-4 text-red-500 mr-1" />
             <span className="text-sm text-red-500">-2.1%</span>
-            <span className="text-xs text-gray-500 ml-1">vs last month</span>
+            <span className="text-xs text-gray-500 ml-1">vs bulan lalu</span>
           </div>
         </div>
 
         <div className="bg-white rounded-lg p-4 shadow-sm">
           <div className="flex items-center justify-between mb-2">
-            <p className="text-sm text-gray-600">Conversion Rate</p>
+            <p className="text-sm text-gray-600">Tingkat Konversi</p>
             <Users className="w-5 h-5 text-orange-500" />
           </div>
           <p className="text-2xl font-bold text-gray-800">3.8%</p>
           <div className="flex items-center mt-2">
             <TrendingUp className="w-4 h-4 text-green-500 mr-1" />
             <span className="text-sm text-green-500">+0.5%</span>
-            <span className="text-xs text-gray-500 ml-1">vs last month</span>
+            <span className="text-xs text-gray-500 ml-1">vs bulan lalu</span>
           </div>
         </div>
       </div>
@@ -226,7 +225,7 @@ const SalesReports = () => {
         <div className="p-6">
           {selectedReport === 'overview' && (
             <div>
-              <h3 className="text-lg font-semibold text-gray-800 mb-4">Revenue Trend</h3>
+              <h3 className="text-lg font-semibold text-gray-800 mb-4">Tren Pendapatan</h3>
               <ResponsiveContainer width="100%" height={300}>
                 <AreaChart data={salesData}>
                   <defs>
@@ -237,8 +236,8 @@ const SalesReports = () => {
                   </defs>
                   <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
                   <XAxis dataKey="date" />
-                  <YAxis tickFormatter={(value) => `${value/1000000}M`} />
-                  <Tooltip formatter={(value) => `Rp ${(value/1000000).toFixed(1)}M`} />
+                  <YAxis tickFormatter={(value) => `${value/1000000}Jt`} />
+                  <Tooltip formatter={(value) => `Rp ${(value/1000000).toFixed(1)}Jt`} />
                   <Area 
                     type="monotone" 
                     dataKey="revenue" 
@@ -254,7 +253,7 @@ const SalesReports = () => {
           {selectedReport === 'categories' && (
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <div>
-                <h3 className="text-lg font-semibold text-gray-800 mb-4">Revenue by Category</h3>
+                <h3 className="text-lg font-semibold text-gray-800 mb-4">Pendapatan per Kategori</h3>
                 <ResponsiveContainer width="100%" height={300}>
                   <PieChart>
                     <Pie
@@ -269,13 +268,13 @@ const SalesReports = () => {
                       <Cell fill="#a855f7" />
                       <Cell fill="#3b82f6" />
                     </Pie>
-                    <Tooltip formatter={(value) => `Rp ${(value/1000000).toFixed(1)}M`} />
+                    <Tooltip formatter={(value) => `Rp ${(value/1000000).toFixed(1)}Jt`} />
                     <Legend />
                   </PieChart>
                 </ResponsiveContainer>
               </div>
               <div>
-                <h3 className="text-lg font-semibold text-gray-800 mb-4">Category Performance</h3>
+                <h3 className="text-lg font-semibold text-gray-800 mb-4">Performa Kategori</h3>
                 <div className="space-y-4">
                   {categoryData.map((category, index) => (
                     <div key={index} className="p-4 bg-gray-50 rounded-lg">
@@ -289,7 +288,7 @@ const SalesReports = () => {
                         </span>
                       </div>
                       <p className="text-xl font-semibold text-gray-900">
-                        Rp {(category.revenue / 1000000).toFixed(1)}M
+                        Rp {(category.revenue / 1000000).toFixed(1)}Jt
                       </p>
                       <div className="mt-2 bg-gray-200 rounded-full h-2">
                         <div 
@@ -297,7 +296,7 @@ const SalesReports = () => {
                           style={{ width: `${category.percentage}%` }}
                         />
                       </div>
-                      <p className="text-xs text-gray-500 mt-1">{category.percentage}% of total revenue</p>
+                      <p className="text-xs text-gray-500 mt-1">{category.percentage}% dari total pendapatan</p>
                     </div>
                   ))}
                 </div>
@@ -307,15 +306,15 @@ const SalesReports = () => {
 
           {selectedReport === 'products' && (
             <div>
-              <h3 className="text-lg font-semibold text-gray-800 mb-4">Top Selling Products</h3>
+              <h3 className="text-lg font-semibold text-gray-800 mb-4">Produk Terlaris</h3>
               <div className="overflow-x-auto">
                 <table className="w-full">
                   <thead className="bg-gray-50 border-b border-gray-200">
                     <tr>
-                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Product</th>
-                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Units Sold</th>
-                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Revenue</th>
-                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Growth</th>
+                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Produk</th>
+                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Unit Terjual</th>
+                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Pendapatan</th>
+                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Pertumbuhan</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200">
@@ -324,7 +323,7 @@ const SalesReports = () => {
                         <td className="px-4 py-3 text-sm text-gray-900">{product.name}</td>
                         <td className="px-4 py-3 text-sm text-gray-900">{product.units.toLocaleString()}</td>
                         <td className="px-4 py-3 text-sm font-medium text-gray-900">
-                          Rp {(product.revenue / 1000000).toFixed(1)}M
+                          Rp {(product.revenue / 1000000).toFixed(1)}Jt
                         </td>
                         <td className="px-4 py-3">
                           <span className={`text-sm font-medium flex items-center ${

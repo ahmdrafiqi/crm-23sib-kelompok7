@@ -25,7 +25,8 @@ import {
   MessageCircle,
   Smartphone,
   Globe, 
-  Eye
+  Eye,
+  X // Import ikon X untuk tombol tutup modal
 } from 'lucide-react';
 import {
   LineChart,
@@ -46,10 +47,10 @@ import {
 
 const Communications = () => {
   const [activeTab, setActiveTab] = useState('overview');
-  const [selectedChannel, setSelectedChannel] = useState('all');
+  const [selectedChannel, setSelectedChannel] = useState('all'); // Variabel ini tidak digunakan di JSX yang diberikan, tetapi saya menyertakannya untuk kelengkapan
   const [showComposer, setShowComposer] = useState(false);
 
-  // Channel stats
+  // Statistik Saluran
   const channels = [
     {
       id: 'whatsapp',
@@ -89,7 +90,7 @@ const Communications = () => {
     },
     {
       id: 'push',
-      name: 'Push Notification',
+      name: 'Notifikasi Push',
       icon: Bell,
       color: '#F59E0B',
       bgColor: '#F59E0B20',
@@ -101,96 +102,96 @@ const Communications = () => {
     }
   ];
 
-  // Automation rules
+  // Aturan Otomatisasi
   const automations = [
     {
       id: 1,
-      name: 'Welcome Series',
-      trigger: 'New Customer Registration',
+      name: 'Rangkaian Selamat Datang',
+      trigger: 'Pendaftaran Pelanggan Baru',
       channel: 'WhatsApp',
       status: 'active',
       sent: 456,
       successRate: 92,
       messages: [
-        { delay: '0 min', content: 'Welcome message + 10% discount' },
-        { delay: '3 days', content: 'Beauty tips & product recommendations' },
-        { delay: '7 days', content: 'Exclusive member benefits' }
+        { delay: '0 mnt', content: 'Pesan selamat datang + diskon 10%' },
+        { delay: '3 hari', content: 'Tips kecantikan & rekomendasi produk' },
+        { delay: '7 hari', content: 'Manfaat eksklusif anggota' }
       ]
     },
     {
       id: 2,
-      name: 'Abandoned Cart Recovery',
-      trigger: 'Cart Abandoned > 2 hours',
+      name: 'Pemulihan Keranjang Terabaikan',
+      trigger: 'Keranjang Ditinggalkan > 2 jam',
       channel: 'SMS',
       status: 'active',
       sent: 234,
       successRate: 35,
       messages: [
-        { delay: '2 hours', content: 'Cart reminder' },
-        { delay: '24 hours', content: '10% discount offer' },
-        { delay: '3 days', content: 'Last chance + free shipping' }
+        { delay: '2 jam', content: 'Pengingat keranjang' },
+        { delay: '24 jam', content: 'Penawaran diskon 10%' },
+        { delay: '3 hari', content: 'Kesempatan terakhir + gratis ongkir' }
       ]
     },
     {
       id: 3,
-      name: 'Birthday Celebration',
-      trigger: 'Customer Birthday',
+      name: 'Perayaan Ulang Tahun',
+      trigger: 'Ulang Tahun Pelanggan',
       channel: 'Email',
       status: 'active',
       sent: 128,
       successRate: 78,
       messages: [
-        { delay: '0 days', content: 'Birthday wish + special voucher' }
+        { delay: '0 hari', content: 'Ucapan ulang tahun + voucher spesial' }
       ]
     },
     {
       id: 4,
-      name: 'Order Updates',
-      trigger: 'Order Status Change',
+      name: 'Pembaruan Pesanan',
+      trigger: 'Perubahan Status Pesanan',
       channel: 'WhatsApp',
       status: 'paused',
       sent: 3456,
       successRate: 95,
       messages: [
-        { delay: '0 min', content: 'Order confirmation' },
-        { delay: 'On shipping', content: 'Shipping notification + tracking' },
-        { delay: 'On delivery', content: 'Delivery confirmation + review request' }
+        { delay: '0 mnt', content: 'Konfirmasi pesanan' },
+        { delay: 'Saat pengiriman', content: 'Notifikasi pengiriman + pelacakan' },
+        { delay: 'Saat pengiriman', content: 'Konfirmasi pengiriman + permintaan ulasan' }
       ]
     }
   ];
 
-  // Message templates
+  // Templat Pesan
   const templates = [
     {
       id: 1,
-      name: 'Flash Sale Alert',
+      name: 'Peringatan Flash Sale',
       channel: 'WhatsApp',
-      category: 'Promotion',
-      content: 'Hi {name}! 🎉 Flash Sale happening NOW! Your favorite {product} is {discount}% OFF! Shop now: {link}',
+      category: 'Promosi',
+      content: 'Hai {name}! 🎉 Flash Sale berlangsung SEKARANG! {product} favoritmu DISKON {discount}%! Belanja sekarang: {link}',
       used: 1234,
       performance: 85
     },
     {
       id: 2,
-      name: 'Order Confirmation',
+      name: 'Konfirmasi Pesanan',
       channel: 'SMS',
-      category: 'Transactional',
-      content: 'Order #{order_id} confirmed! Total: Rp {total}. Est. delivery: {date}. Track: {tracking_link}',
+      category: 'Transaksional',
+      content: 'Pesanan #{order_id} dikonfirmasi! Total: Rp {total}. Perkiraan pengiriman: {date}. Lacak: {tracking_link}',
       used: 5678,
       performance: 98
     },
     {
       id: 3,
-      name: 'VIP Exclusive',
+      name: 'Eksklusif VIP',
       channel: 'Email',
       category: 'VIP',
-      content: 'Exclusive for our VIP members! Get early access to our new collection...',
+      content: 'Eksklusif untuk anggota VIP kami! Dapatkan akses awal ke koleksi baru kami...',
       used: 345,
       performance: 92
     }
   ];
 
-  // Communication performance data
+  // Data kinerja komunikasi
   const performanceData = [
     { time: '08:00', whatsapp: 85, sms: 72, email: 45, push: 65 },
     { time: '10:00', whatsapp: 92, sms: 78, email: 52, push: 70 },
@@ -201,12 +202,12 @@ const Communications = () => {
     { time: '20:00', whatsapp: 96, sms: 88, email: 65, push: 85 }
   ];
 
-  // Recent communications
+  // Komunikasi Terbaru
   const recentComms = [
-    { id: 1, customer: 'Sarah Putri', channel: 'WhatsApp', type: 'Flash Sale', status: 'read', time: '10 min ago', response: 'Interested' },
-    { id: 2, customer: 'Maya Anggraini', channel: 'SMS', type: 'Order Update', status: 'delivered', time: '25 min ago', response: null },
-    { id: 3, customer: 'Dewi Kartika', channel: 'Email', type: 'Birthday Wish', status: 'opened', time: '1 hour ago', response: 'Thanked' },
-    { id: 4, customer: 'Linda Wijaya', channel: 'Push', type: 'New Arrival', status: 'sent', time: '2 hours ago', response: null }
+    { id: 1, customer: 'Sarah Putri', channel: 'WhatsApp', type: 'Flash Sale', status: 'read', time: '10 mnt lalu', response: 'Tertarik' },
+    { id: 2, customer: 'Maya Anggraini', channel: 'SMS', type: 'Pembaruan Pesanan', status: 'delivered', time: '25 mnt lalu', response: null },
+    { id: 3, customer: 'Dewi Kartika', channel: 'Email', type: 'Ucapan Ulang Tahun', status: 'opened', time: '1 jam lalu', response: 'Berterima kasih' },
+    { id: 4, customer: 'Linda Wijaya', channel: 'Push', type: 'Kedatangan Baru', status: 'sent', time: '2 jam lalu', response: null }
   ];
 
   const totalSent = channels.reduce((sum, ch) => sum + ch.sent, 0);
@@ -217,57 +218,57 @@ const Communications = () => {
     <main className="flex-1 p-6 bg-gray-50">
       {/* Header */}
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-gray-800">Communications</h1>
-        <p className="text-gray-600">Manage multi-channel customer communications and automations</p>
+        <h1 className="text-2xl font-bold text-gray-800">Komunikasi</h1>
+        <p className="text-gray-600">Kelola komunikasi dan otomatisasi pelanggan multi-saluran</p>
       </div>
 
-      {/* Stats Overview */}
+      {/* Ringkasan Statistik */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
         <div className="bg-white rounded-lg p-4 shadow-sm">
           <div className="flex items-center justify-between mb-2">
-            <p className="text-sm text-gray-600">Messages Sent</p>
+            <p className="text-sm text-gray-600">Pesan Terkirim</p>
             <Send className="w-5 h-5 text-blue-500" />
           </div>
           <p className="text-2xl font-bold text-gray-800">{(totalSent / 1000).toFixed(1)}K</p>
-          <p className="text-xs text-green-600 mt-1">+18% from last month</p>
+          <p className="text-xs text-green-600 mt-1">+18% dari bulan lalu</p>
         </div>
 
         <div className="bg-white rounded-lg p-4 shadow-sm">
           <div className="flex items-center justify-between mb-2">
-            <p className="text-sm text-gray-600">Delivery Rate</p>
+            <p className="text-sm text-gray-600">Tingkat Pengiriman</p>
             <CheckCircle className="w-5 h-5 text-green-500" />
           </div>
           <p className="text-2xl font-bold text-gray-800">{Math.round(totalDelivered / totalSent * 100)}%</p>
-          <p className="text-xs text-gray-500 mt-1">Industry avg: 95%</p>
+          <p className="text-xs text-gray-500 mt-1">Rata-rata industri: 95%</p>
         </div>
 
         <div className="bg-white rounded-lg p-4 shadow-sm">
           <div className="flex items-center justify-between mb-2">
-            <p className="text-sm text-gray-600">Avg Open Rate</p>
+            <p className="text-sm text-gray-600">Rata-rata Tingkat Buka</p>
             <Eye className="w-5 h-5 text-purple-500" />
           </div>
           <p className="text-2xl font-bold text-gray-800">{avgOpenRate}%</p>
-          <p className="text-xs text-green-600 mt-1">+5% improvement</p>
+          <p className="text-xs text-green-600 mt-1">+5% peningkatan</p>
         </div>
 
         <div className="bg-white rounded-lg p-4 shadow-sm">
           <div className="flex items-center justify-between mb-2">
-            <p className="text-sm text-gray-600">Active Automations</p>
+            <p className="text-sm text-gray-600">Otomatisasi Aktif</p>
             <Zap className="w-5 h-5 text-yellow-500" />
           </div>
           <p className="text-2xl font-bold text-gray-800">{automations.filter(a => a.status === 'active').length}</p>
-          <p className="text-xs text-gray-500 mt-1">2 paused</p>
+          <p className="text-xs text-gray-500 mt-1">2 dijeda</p>
         </div>
       </div>
 
-      {/* Channel Performance */}
+      {/* Kinerja Saluran */}
       <div className="bg-white rounded-xl shadow-sm mb-6 p-6">
         <div className="flex justify-between items-center mb-4">
-          <h3 className="text-lg font-semibold text-gray-800">Channel Performance</h3>
+          <h3 className="text-lg font-semibold text-gray-800">Kinerja Saluran</h3>
           <select className="border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-pink-500">
-            <option>Last 7 days</option>
-            <option>Last 30 days</option>
-            <option>Last 3 months</option>
+            <option>7 hari terakhir</option>
+            <option>30 hari terakhir</option>
+            <option>3 bulan terakhir</option>
           </select>
         </div>
 
@@ -294,15 +295,15 @@ const Communications = () => {
                 
                 <div className="space-y-2">
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">Sent</span>
+                    <span className="text-gray-600">Terkirim</span>
                     <span className="font-medium">{channel.sent.toLocaleString()}</span>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">Open Rate</span>
+                    <span className="text-gray-600">Tingkat Buka</span>
                     <span className="font-medium text-green-600">{openRate}%</span>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">Response</span>
+                    <span className="text-gray-600">Tanggapan</span>
                     <span className="font-medium text-blue-600">{responseRate}%</span>
                   </div>
                 </div>
@@ -311,9 +312,9 @@ const Communications = () => {
           })}
         </div>
 
-        {/* Performance Chart */}
+        {/* Bagan Kinerja */}
         <div>
-          <h4 className="text-sm font-medium text-gray-700 mb-3">Hourly Open Rate Trend</h4>
+          <h4 className="text-sm font-medium text-gray-700 mb-3">Tren Tingkat Buka per Jam</h4>
           <ResponsiveContainer width="100%" height={200}>
             <LineChart data={performanceData}>
               <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
@@ -329,7 +330,7 @@ const Communications = () => {
         </div>
       </div>
 
-      {/* Tabs */}
+      {/* Tab */}
       <div className="bg-white rounded-xl shadow-sm">
         <div className="border-b border-gray-200">
           <div className="flex">
@@ -353,13 +354,13 @@ const Communications = () => {
           {activeTab === 'overview' && (
             <div>
               <div className="flex justify-between items-center mb-4">
-                <h3 className="text-lg font-semibold text-gray-800">Recent Communications</h3>
+                <h3 className="text-lg font-semibold text-gray-800">Komunikasi Terbaru</h3>
                 <button 
                   onClick={() => setShowComposer(true)}
                   className="px-4 py-2 bg-pink-500 text-white rounded-lg hover:bg-pink-600 flex items-center gap-2"
                 >
                   <Plus className="w-4 h-4" />
-                  New Message
+                  Pesan Baru
                 </button>
               </div>
 
@@ -367,12 +368,12 @@ const Communications = () => {
                 <table className="w-full">
                   <thead className="bg-gray-50 border-b border-gray-200">
                     <tr>
-                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Customer</th>
-                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Channel</th>
-                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Type</th>
+                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Pelanggan</th>
+                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Saluran</th>
+                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Tipe</th>
                       <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
-                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Response</th>
-                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Time</th>
+                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Tanggapan</th>
+                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Waktu</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200">
@@ -427,10 +428,10 @@ const Communications = () => {
           {activeTab === 'automations' && (
             <div>
               <div className="flex justify-between items-center mb-4">
-                <h3 className="text-lg font-semibold text-gray-800">Automation Rules</h3>
+                <h3 className="text-lg font-semibold text-gray-800">Aturan Otomatisasi</h3>
                 <button className="px-4 py-2 bg-pink-500 text-white rounded-lg hover:bg-pink-600 flex items-center gap-2">
                   <Plus className="w-4 h-4" />
-                  Create Automation
+                  Buat Otomatisasi
                 </button>
               </div>
 
@@ -450,7 +451,7 @@ const Communications = () => {
                           </span>
                         </div>
                         <p className="text-sm text-gray-600 mt-1">
-                          Trigger: {automation.trigger} • Channel: {automation.channel}
+                          Pemicu: {automation.trigger} • Saluran: {automation.channel}
                         </p>
                       </div>
                       <div className="flex gap-2">
@@ -465,21 +466,21 @@ const Communications = () => {
 
                     <div className="grid grid-cols-3 gap-4 mb-3">
                       <div>
-                        <p className="text-xs text-gray-500">Messages Sent</p>
+                        <p className="text-xs text-gray-500">Pesan Terkirim</p>
                         <p className="text-sm font-medium">{automation.sent}</p>
                       </div>
                       <div>
-                        <p className="text-xs text-gray-500">Success Rate</p>
+                        <p className="text-xs text-gray-500">Tingkat Keberhasilan</p>
                         <p className="text-sm font-medium text-green-600">{automation.successRate}%</p>
                       </div>
                       <div>
-                        <p className="text-xs text-gray-500">Messages</p>
-                        <p className="text-sm font-medium">{automation.messages.length} steps</p>
+                        <p className="text-xs text-gray-500">Pesan</p>
+                        <p className="text-sm font-medium">{automation.messages.length} langkah</p>
                       </div>
                     </div>
 
                     <div className="border-t pt-3">
-                      <p className="text-xs font-medium text-gray-700 mb-2">Message Flow:</p>
+                      <p className="text-xs font-medium text-gray-700 mb-2">Alur Pesan:</p>
                       <div className="space-y-1">
                         {automation.messages.map((msg, index) => (
                           <div key={index} className="flex items-center text-xs text-gray-600">
@@ -499,17 +500,17 @@ const Communications = () => {
           {activeTab === 'templates' && (
             <div>
               <div className="flex justify-between items-center mb-4">
-                <h3 className="text-lg font-semibold text-gray-800">Message Templates</h3>
+                <h3 className="text-lg font-semibold text-gray-800">Templat Pesan</h3>
                 <div className="flex gap-2">
                   <select className="border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-pink-500">
-                    <option>All Channels</option>
+                    <option>Semua Saluran</option>
                     <option>WhatsApp</option>
                     <option>SMS</option>
                     <option>Email</option>
                   </select>
                   <button className="px-4 py-2 bg-pink-500 text-white rounded-lg hover:bg-pink-600 flex items-center gap-2">
                     <Plus className="w-4 h-4" />
-                    New Template
+                    Templat Baru
                   </button>
                 </div>
               </div>
@@ -545,14 +546,14 @@ const Communications = () => {
 
                     <div className="flex justify-between items-center">
                       <div className="flex items-center gap-3 text-xs text-gray-500">
-                        <span>Used: {template.used}x</span>
+                        <span>Digunakan: {template.used}x</span>
                         <span className="flex items-center">
                           <Star className="w-3 h-3 mr-1 text-yellow-500" />
-                          {template.performance}% success
+                          {template.performance}% berhasil
                         </span>
                       </div>
                       <button className="text-pink-600 text-xs font-medium hover:text-pink-700">
-                        Use Template →
+                        Gunakan Templat →
                       </button>
                     </div>
                   </div>
@@ -563,12 +564,12 @@ const Communications = () => {
         </div>
       </div>
 
-      {/* Message Composer Modal */}
+      {/* Modal Komposer Pesan */}
       {showComposer && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-xl p-6 w-full max-w-2xl max-h-[90vh] overflow-y-auto">
             <div className="flex justify-between items-center mb-4">
-              <h3 className="text-lg font-semibold text-gray-800">Compose Message</h3>
+              <h3 className="text-lg font-semibold text-gray-800">Tulis Pesan</h3>
               <button onClick={() => setShowComposer(false)} className="text-gray-400 hover:text-gray-600">
                 <X className="w-5 h-5" />
               </button>
@@ -576,7 +577,7 @@ const Communications = () => {
 
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Channel</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Saluran</label>
                 <div className="grid grid-cols-4 gap-2">
                   {channels.map((channel) => {
                     const Icon = channel.icon;
@@ -594,43 +595,43 @@ const Communications = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Recipients</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Penerima</label>
                 <select className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-pink-500">
-                  <option>All Customers</option>
-                  <option>VIP Customers</option>
-                  <option>New Customers</option>
-                  <option>Custom Segment...</option>
+                  <option>Semua Pelanggan</option>
+                  <option>Pelanggan VIP</option>
+                  <option>Pelanggan Baru</option>
+                  <option>Segmen Kustom...</option>
                 </select>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Message</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Pesan</label>
                 <textarea
                   rows="6"
                   className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-pink-500"
-                  placeholder="Type your message here..."
+                  placeholder="Ketik pesan Anda di sini..."
                 />
                 <div className="flex gap-2 mt-2">
-                  <button className="text-xs text-gray-500 hover:text-gray-700">{`{name}`}</button>
-                  <button className="text-xs text-gray-500 hover:text-gray-700">{`{points}`}</button>
-                  <button className="text-xs text-gray-500 hover:text-gray-700">{`{last_product}`}</button>
+                  <button className="text-xs text-gray-500 hover:text-gray-700">{`{nama}`}</button>
+                  <button className="text-xs text-gray-500 hover:text-gray-700">{`{poin}`}</button>
+                  <button className="text-xs text-gray-500 hover:text-gray-700">{`{produk_terakhir}`}</button>
                 </div>
               </div>
 
               <div className="flex justify-between">
                 <button className="px-4 py-2 text-gray-700 hover:text-gray-900">
-                  Save as Template
+                  Simpan sebagai Templat
                 </button>
                 <div className="flex gap-2">
                   <button
                     onClick={() => setShowComposer(false)}
                     className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50"
                   >
-                    Cancel
+                    Batal
                   </button>
                   <button className="px-6 py-2 bg-pink-500 text-white rounded-lg hover:bg-pink-600 flex items-center gap-2">
                     <Send className="w-4 h-4" />
-                    Send Now
+                    Kirim Sekarang
                   </button>
                 </div>
               </div>

@@ -18,13 +18,14 @@ import { Link, useLocation } from 'react-router-dom';
 
 const AdminSidebar = () => {
   const location = useLocation();
+  // Mengatur menu yang diperluas secara default saat dimuat
   const [expandedMenus, setExpandedMenus] = useState(['customer', 'sales', 'marketing']);
 
   const toggleMenu = (menuKey) => {
     setExpandedMenus(prev => 
       prev.includes(menuKey) 
-        ? prev.filter(key => key !== menuKey)
-        : [...prev, menuKey]
+        ? prev.filter(key => key !== menuKey) // Tutup jika sudah diperluas
+        : [...prev, menuKey] // Perluas jika belum diperluas
     );
   };
 
@@ -38,67 +39,67 @@ const AdminSidebar = () => {
     },
     {
       key: 'user',
-      label: 'Users',
+      label: 'Pengguna',
       icon: User,
       path: '/admin/user',
       hasSubmenu: false
     },
     {
       key: 'customer',
-      label: 'Customer Management',
+      label: 'Manajemen Pelanggan',
       icon: Users,
       hasSubmenu: true,
       submenu: [
-        { label: 'All Customers', path: '/admin/customers' },
-        { label: 'Customer Segmentation', path: '/admin/customers/segmentation' }
+        { label: 'Semua Pelanggan', path: '/admin/customers' },
+        { label: 'Segmentasi Pelanggan', path: '/admin/customers/segmentation' }
       ]
     },
     {
       key: 'sales',
-      label: 'Sales Force',
+      label: 'Penjualan',
       icon: ShoppingBag,
       hasSubmenu: true,
       submenu: [
-        { label: 'Order Management', path: '/admin/orders' },
-        { label: 'Product Management', path: '/admin/products' },
-        { label: 'Sales Reports', path: '/admin/sales-reports' }
+        { label: 'Manajemen Pesanan', path: '/admin/orders' },
+        { label: 'Manajemen Produk', path: '/admin/products' },
+        { label: 'Laporan Penjualan', path: '/admin/sales-reports' }
       ]
     },
     {
       key: 'marketing',
-      label: 'Marketing',
+      label: 'Pemasaran',
       icon: Mail,
       hasSubmenu: true,
       submenu: [
-        { label: 'Email Campaigns', path: '/admin/campaigns' },
-        { label: 'Loyalty Program', path: '/admin/loyalty' },
-        { label: 'Communications', path: '/admin/communications' }
+        { label: 'Kampanye Email', path: '/admin/campaigns' },
+        { label: 'Program Loyalitas', path: '/admin/loyalty' },
+        { label: 'Komunikasi', path: '/admin/communications' }
       ]
     },
     {
       key: 'service',
-      label: 'Customer Service',
+      label: 'Layanan Pelanggan',
       icon: HeadphonesIcon,
       hasSubmenu: true,
       submenu: [
-        { label: 'Support Tickets', path: '/admin/tickets' },
-        { label: 'Knowledge Base', path: '/admin/knowledge' }
+        { label: 'Tiket Dukungan', path: '/admin/tickets' },
+        { label: 'Basis Pengetahuan', path: '/admin/knowledge' }
       ]
     },
     {
       key: 'analytics',
-      label: 'Analytics & Reports',
+      label: 'Analitik & Laporan',
       icon: PieChart,
       hasSubmenu: true,
       submenu: [
-        { label: 'Customer Analytics', path: '/admin/analytics/customers' },
-        { label: 'Sales Analytics', path: '/admin/analytics/sales' },
-        { label: 'Campaign Analytics', path: '/admin/analytics/campaigns' }
+        { label: 'Analitik Pelanggan', path: '/admin/analytics/customers' },
+        { label: 'Analitik Penjualan', path: '/admin/analytics/sales' },
+        { label: 'Analitik Kampanye', path: '/admin/analytics/campaigns' }
       ]
     },
     {
       key: 'settings',
-      label: 'Settings',
+      label: 'Pengaturan',
       icon: Settings,
       path: '/admin/settings',
       hasSubmenu: false
@@ -109,7 +110,7 @@ const AdminSidebar = () => {
     <aside className="w-64 bg-white shadow-sm min-h-screen">
       <div className="p-6">
         <div className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-4">
-          CRM MENU
+          MENU CRM
         </div>
 
         <nav className="space-y-1">

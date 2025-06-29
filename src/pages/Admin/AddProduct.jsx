@@ -113,10 +113,10 @@ const AddProduct = () => {
           className="flex items-center text-gray-600 hover:text-gray-800 mb-4"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
-          Back to products
+          Kembali ke halaman produk
         </button>
-        <h1 className="text-2xl font-bold text-gray-800">Add New products</h1>
-        <p className="text-gray-600">Create a new products profile</p>
+        <h1 className="text-2xl font-bold text-gray-800">produk baru</h1>
+        <p className="text-gray-600">Tambah produk baru</p>
       </div>
 
       {/* Form */}
@@ -126,14 +126,14 @@ const AddProduct = () => {
   <div className="bg-white rounded-xl shadow-sm p-6 mb-6">
     <h2 className="text-lg font-semibold text-gray-800 mb-4 flex items-center">
       <User className="w-5 h-5 mr-2 text-pink-500" />
-      Product Information
+      Informasi produk
     </h2>
 
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
       {/* Nama Produk */}
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-2">
-          Product Name <span className="text-red-500">*</span>
+          Nama produk <span className="text-red-500">*</span>
         </label>
         <input
           type="text"
@@ -143,7 +143,7 @@ const AddProduct = () => {
           className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 ${
             errors.nama_produk ? "border-red-500" : "border-gray-300"
           }`}
-          placeholder="Enter product name"
+          placeholder="Masukkan nama produk"
         />
         {errors.nama_produk && (
           <p className="text-red-500 text-xs mt-1">{errors.nama_produk}</p>
@@ -153,7 +153,7 @@ const AddProduct = () => {
       {/* Kategori */}
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-2">
-          Category <span className="text-red-500">*</span>
+          kategori <span className="text-red-500">*</span>
         </label>
         <input
           type="text"
@@ -163,7 +163,7 @@ const AddProduct = () => {
           className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 ${
             errors.kategori ? "border-red-500" : "border-gray-300"
           }`}
-          placeholder="Enter category"
+          placeholder="Masukkan kategori"
         />
         {errors.kategori && (
           <p className="text-red-500 text-xs mt-1">{errors.kategori}</p>
@@ -173,7 +173,7 @@ const AddProduct = () => {
       {/* Harga */}
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-2">
-          Price (Rp) <span className="text-red-500">*</span>
+          Harga (Rp) <span className="text-red-500">*</span>
         </label>
         <input
           type="number"
@@ -183,7 +183,7 @@ const AddProduct = () => {
           className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 ${
             errors.harga ? "border-red-500" : "border-gray-300"
           }`}
-          placeholder="Enter price"
+          placeholder="harga"
         />
         {errors.harga && (
           <p className="text-red-500 text-xs mt-1">{errors.harga}</p>
@@ -193,7 +193,7 @@ const AddProduct = () => {
       {/* Stok */}
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-2">
-          Stock <span className="text-red-500">*</span>
+          Stok <span className="text-red-500">*</span>
         </label>
         <input
           type="number"
@@ -203,7 +203,7 @@ const AddProduct = () => {
           className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 ${
             errors.stok ? "border-red-500" : "border-gray-300"
           }`}
-          placeholder="Enter stock"
+          placeholder="Stok"
         />
         {errors.stok && (
           <p className="text-red-500 text-xs mt-1">{errors.stok}</p>
@@ -214,14 +214,14 @@ const AddProduct = () => {
     {/* Deskripsi */}
     <div className="mt-6">
       <label className="block text-sm font-medium text-gray-700 mb-2">
-        Description
+        Deskripsi
       </label>
       <textarea
         name="deskripsi"
         value={formData.deskripsi}
         onChange={handleChange}
         className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
-        placeholder="Enter product description"
+        placeholder="Masukkan deskripsi produk"
         rows={4}
       ></textarea>
     </div>
@@ -253,7 +253,7 @@ const AddProduct = () => {
       {/* Gambar Produk */}
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-2">
-          Product Image URL
+        URL gambar produk
         </label>
         <input
           type="text"
@@ -273,7 +273,7 @@ const AddProduct = () => {
       type="submit"
       className="bg-pink-500 text-white px-6 py-2 rounded-lg hover:bg-pink-600 transition-colors"
     >
-      Save Product
+      Simpan Produk
     </button>
   </div>
 </form>

@@ -54,7 +54,7 @@ const OrderDetail = () => {
           className="flex items-center text-gray-600 hover:text-gray-800"
         >
           <ChevronLeft className="w-5 h-5 mr-1" />
-          Back
+          kembali
         </button>
         <div>
           <h1 className="text-2xl font-bold text-gray-800">

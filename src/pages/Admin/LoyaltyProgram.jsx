@@ -49,12 +49,12 @@ const LoyaltyProgram = () => {
       color: '#cd7f32',
       bgColor: '#fef3c7',
       members: 8456,
-      requirements: 'Spend Rp 1M',
+      requirements: 'Belanja Rp 1Jt',
       benefits: [
-        '5% discount on all products',
-        'Birthday bonus 100 points',
-        'Free shipping min. Rp 200K',
-        'Early sale access'
+        'Diskon 5% untuk semua produk',
+        'Bonus ulang tahun 100 poin',
+        'Gratis ongkir min. Rp 200rb',
+        'Akses penjualan lebih awal'
       ],
       avgSpend: 1500000,
       retention: 65
@@ -66,13 +66,13 @@ const LoyaltyProgram = () => {
       color: '#6b7280',
       bgColor: '#f3f4f6',
       members: 3245,
-      requirements: 'Spend Rp 5M',
+      requirements: 'Belanja Rp 5Jt',
       benefits: [
-        '10% discount on all products',
-        'Birthday bonus 200 points',
-        'Free shipping all orders',
-        'Exclusive member events',
-        'Personal beauty consultation'
+        'Diskon 10% untuk semua produk',
+        'Bonus ulang tahun 200 poin',
+        'Gratis ongkir semua pesanan',
+        'Acara eksklusif anggota',
+        'Konsultasi kecantikan pribadi'
       ],
       avgSpend: 5800000,
       retention: 80
@@ -84,14 +84,14 @@ const LoyaltyProgram = () => {
       color: '#f59e0b',
       bgColor: '#fef3c7',
       members: 1144,
-      requirements: 'Spend Rp 10M',
+      requirements: 'Belanja Rp 10Jt',
       benefits: [
-        '15% discount on all products',
-        'Birthday bonus 500 points',
-        'Free shipping + priority',
-        'VIP customer service',
-        'Exclusive product launches',
-        'Complimentary makeover sessions'
+        'Diskon 15% untuk semua produk',
+        'Bonus ulang tahun 500 poin',
+        'Gratis ongkir + prioritas',
+        'Layanan pelanggan VIP',
+        'Peluncuran produk eksklusif',
+        'Sesi make over gratis'
       ],
       avgSpend: 12500000,
       retention: 95
@@ -100,11 +100,11 @@ const LoyaltyProgram = () => {
 
   // Points activity
   const recentActivity = [
-    { id: 1, customer: 'Sarah Putri', action: 'Purchase', points: '+250', tier: 'Gold', time: '2 hours ago' },
-    { id: 2, customer: 'Maya Anggraini', action: 'Referral', points: '+100', tier: 'Silver', time: '3 hours ago' },
-    { id: 3, customer: 'Dewi Kartika', action: 'Birthday Bonus', points: '+500', tier: 'Gold', time: '5 hours ago' },
-    { id: 4, customer: 'Linda Wijaya', action: 'Review', points: '+50', tier: 'Bronze', time: '6 hours ago' },
-    { id: 5, customer: 'Rina Susanti', action: 'Redeemed', points: '-1000', tier: 'Silver', time: '8 hours ago' }
+    { id: 1, customer: 'Sarah Putri', action: 'Pembelian', points: '+250', tier: 'Gold', time: '2 jam lalu' },
+    { id: 2, customer: 'Maya Anggraini', action: 'Referral', points: '+100', tier: 'Silver', time: '3 jam lalu' },
+    { id: 3, customer: 'Dewi Kartika', action: 'Bonus Ulang Tahun', points: '+500', tier: 'Gold', time: '5 jam lalu' },
+    { id: 4, customer: 'Linda Wijaya', action: 'Ulasan', points: '+50', tier: 'Bronze', time: '6 jam lalu' },
+    { id: 5, customer: 'Rina Susanti', action: 'Ditukar', points: '-1000', tier: 'Silver', time: '8 jam lalu' }
   ];
 
   // Monthly growth
@@ -128,10 +128,10 @@ const LoyaltyProgram = () => {
 
   // Redemption options
   const redemptions = [
-    { id: 1, name: 'Rp 50K Voucher', points: 500, redeemed: 1234, icon: Gift },
-    { id: 2, name: 'Free Lipstick', points: 1000, redeemed: 892, icon: Heart },
-    { id: 3, name: 'Spa Treatment', points: 2500, redeemed: 456, icon: Sparkles },
-    { id: 4, name: 'Exclusive Gift Set', points: 5000, redeemed: 234, icon: Trophy }
+    { id: 1, name: 'Voucher Rp 50rb', points: 500, redeemed: 1234, icon: Gift },
+    { id: 2, name: 'Lipstik Gratis', points: 1000, redeemed: 892, icon: Heart },
+    { id: 3, name: 'Perawatan Spa', points: 2500, redeemed: 456, icon: Sparkles },
+    { id: 4, name: 'Set Hadiah Eksklusif', points: 5000, redeemed: 234, icon: Trophy }
   ];
 
   const totalMembers = tiers.reduce((sum, tier) => sum + tier.members, 0);
@@ -142,46 +142,46 @@ const LoyaltyProgram = () => {
     <main className="flex-1 p-6 bg-gray-50">
       {/* Header */}
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-gray-800">Loyalty Program</h1>
-        <p className="text-gray-600">Manage Miss Glam rewards program and member benefits</p>
+        <h1 className="text-2xl font-bold text-gray-800">Program Loyalitas</h1>
+        <p className="text-gray-600">Kelola program hadiah dan manfaat anggota Miss Glam</p>
       </div>
 
       {/* Stats Overview */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
         <div className="bg-white rounded-lg p-4 shadow-sm">
           <div className="flex items-center justify-between mb-2">
-            <p className="text-sm text-gray-600">Total Members</p>
+            <p className="text-sm text-gray-600">Total Anggota</p>
             <Users className="w-5 h-5 text-pink-500" />
           </div>
           <p className="text-2xl font-bold text-gray-800">{totalMembers.toLocaleString()}</p>
-          <p className="text-xs text-green-600 mt-1">+15% from last month</p>
+          <p className="text-xs text-green-600 mt-1">+15% dari bulan lalu</p>
         </div>
 
         <div className="bg-white rounded-lg p-4 shadow-sm">
           <div className="flex items-center justify-between mb-2">
-            <p className="text-sm text-gray-600">Points Issued</p>
+            <p className="text-sm text-gray-600">Poin Dikeluarkan</p>
             <Zap className="w-5 h-5 text-yellow-500" />
           </div>
-          <p className="text-2xl font-bold text-gray-800">{(totalPointsIssued / 1000000).toFixed(1)}M</p>
-          <p className="text-xs text-gray-500 mt-1">This month</p>
+          <p className="text-2xl font-bold text-gray-800">{(totalPointsIssued / 1000000).toFixed(1)}Jt</p>
+          <p className="text-xs text-gray-500 mt-1">Bulan ini</p>
         </div>
 
         <div className="bg-white rounded-lg p-4 shadow-sm">
           <div className="flex items-center justify-between mb-2">
-            <p className="text-sm text-gray-600">Points Redeemed</p>
+            <p className="text-sm text-gray-600">Poin Ditukar</p>
             <Gift className="w-5 h-5 text-purple-500" />
           </div>
-          <p className="text-2xl font-bold text-gray-800">{(totalPointsRedeemed / 1000000).toFixed(1)}M</p>
-          <p className="text-xs text-gray-500 mt-1">51% redemption rate</p>
+          <p className="text-2xl font-bold text-gray-800">{(totalPointsRedeemed / 1000000).toFixed(1)}Jt</p>
+          <p className="text-xs text-gray-500 mt-1">Tingkat penukaran 51%</p>
         </div>
 
         <div className="bg-white rounded-lg p-4 shadow-sm">
           <div className="flex items-center justify-between mb-2">
-            <p className="text-sm text-gray-600">Active Rate</p>
+            <p className="text-sm text-gray-600">Tingkat Aktivitas</p>
             <TrendingUp className="w-5 h-5 text-green-500" />
           </div>
           <p className="text-2xl font-bold text-gray-800">78%</p>
-          <p className="text-xs text-green-600 mt-1">+5% from last month</p>
+          <p className="text-xs text-green-600 mt-1">+5% dari bulan lalu</p>
         </div>
       </div>
 
@@ -189,19 +189,23 @@ const LoyaltyProgram = () => {
       <div className="bg-white rounded-xl shadow-sm mb-6">
         <div className="border-b border-gray-200">
           <div className="flex">
-            {['overview', 'tiers', 'rewards', 'activity'].map((tab) => (
-              <button
-                key={tab}
-                onClick={() => setActiveTab(tab)}
-                className={`px-6 py-3 text-sm font-medium border-b-2 transition-colors ${
-                  activeTab === tab
-                    ? 'text-pink-600 border-pink-600'
-                    : 'text-gray-500 border-transparent hover:text-gray-700'
-                }`}
-              >
-                {tab.charAt(0).toUpperCase() + tab.slice(1)}
-              </button>
-            ))}
+            {['Ringkasan', 'Tingkatan', 'Hadiah', 'Aktivitas'].map((tabLabel, index) => {
+              const tabIds = ['overview', 'tiers', 'rewards', 'activity'];
+              const tab = tabIds[index];
+              return (
+                <button
+                  key={tab}
+                  onClick={() => setActiveTab(tab)}
+                  className={`px-6 py-3 text-sm font-medium border-b-2 transition-colors ${
+                    activeTab === tab
+                      ? 'text-pink-600 border-pink-600'
+                      : 'text-gray-500 border-transparent hover:text-gray-700'
+                  }`}
+                >
+                  {tabLabel}
+                </button>
+              );
+            })}
           </div>
         </div>
 
@@ -212,7 +216,7 @@ const LoyaltyProgram = () => {
               {/* Member Distribution */}
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-800 mb-4">Member Distribution by Tier</h3>
+                  <h3 className="text-lg font-semibold text-gray-800 mb-4">Distribusi Anggota berdasarkan Tingkat</h3>
                   <ResponsiveContainer width="100%" height={300}>
                     <PieChart>
                       <Pie
@@ -242,7 +246,7 @@ const LoyaltyProgram = () => {
                 </div>
 
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-800 mb-4">Member Growth Trend</h3>
+                  <h3 className="text-lg font-semibold text-gray-800 mb-4">Tren Pertumbuhan Anggota</h3>
                   <ResponsiveContainer width="100%" height={300}>
                     <AreaChart data={monthlyGrowth}>
                       <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
@@ -259,7 +263,7 @@ const LoyaltyProgram = () => {
 
               {/* Points Distribution */}
               <div>
-                <h3 className="text-lg font-semibold text-gray-800 mb-4">Points Balance Distribution</h3>
+                <h3 className="text-lg font-semibold text-gray-800 mb-4">Distribusi Saldo Poin</h3>
                 <ResponsiveContainer width="100%" height={200}>
                   <BarChart data={pointsData}>
                     <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
@@ -288,7 +292,7 @@ const LoyaltyProgram = () => {
                           </div>
                           <div className="ml-3">
                             <h3 className="text-lg font-semibold text-gray-800">{tier.name}</h3>
-                            <p className="text-sm text-gray-600">{tier.members.toLocaleString()} members</p>
+                            <p className="text-sm text-gray-600">{tier.members.toLocaleString()} anggota</p>
                           </div>
                         </div>
                         <button className="text-gray-400 hover:text-gray-600">
@@ -297,12 +301,12 @@ const LoyaltyProgram = () => {
                       </div>
 
                       <div className="mb-4">
-                        <p className="text-sm font-medium text-gray-700 mb-1">Requirements</p>
+                        <p className="text-sm font-medium text-gray-700 mb-1">Persyaratan</p>
                         <p className="text-sm text-gray-600">{tier.requirements}</p>
                       </div>
 
                       <div className="mb-4">
-                        <p className="text-sm font-medium text-gray-700 mb-2">Benefits</p>
+                        <p className="text-sm font-medium text-gray-700 mb-2">Manfaat</p>
                         <ul className="space-y-1">
                           {tier.benefits.slice(0, 3).map((benefit, index) => (
                             <li key={index} className="text-xs text-gray-600 flex items-start">
@@ -311,20 +315,20 @@ const LoyaltyProgram = () => {
                             </li>
                           ))}
                           {tier.benefits.length > 3 && (
-                            <li className="text-xs text-pink-600">+{tier.benefits.length - 3} more benefits</li>
+                            <li className="text-xs text-pink-600">+{tier.benefits.length - 3} manfaat lainnya</li>
                           )}
                         </ul>
                       </div>
 
                       <div className="grid grid-cols-2 gap-4 pt-4 border-t border-gray-200">
                         <div>
-                          <p className="text-xs text-gray-500">Avg. Spend</p>
+                          <p className="text-xs text-gray-500">Rata-rata Pembelanjaan</p>
                           <p className="text-sm font-semibold text-gray-800">
-                            Rp {(tier.avgSpend / 1000000).toFixed(1)}M
+                            Rp {(tier.avgSpend / 1000000).toFixed(1)}Jt
                           </p>
                         </div>
                         <div>
-                          <p className="text-xs text-gray-500">Retention</p>
+                          <p className="text-xs text-gray-500">Retensi</p>
                           <p className="text-sm font-semibold text-gray-800">{tier.retention}%</p>
                         </div>
                       </div>
@@ -337,7 +341,7 @@ const LoyaltyProgram = () => {
               <div className="flex justify-center">
                 <button className="px-6 py-3 bg-pink-500 text-white rounded-lg hover:bg-pink-600 flex items-center gap-2">
                   <Settings className="w-4 h-4" />
-                  Configure Tier Settings
+                  Konfigurasi Pengaturan Tingkat
                 </button>
               </div>
             </div>
@@ -347,10 +351,10 @@ const LoyaltyProgram = () => {
             <div className="space-y-6">
               {/* Add Reward Button */}
               <div className="flex justify-between items-center">
-                <h3 className="text-lg font-semibold text-gray-800">Redemption Catalog</h3>
+                <h3 className="text-lg font-semibold text-gray-800">Katalog Penukaran</h3>
                 <button className="px-4 py-2 bg-pink-500 text-white rounded-lg hover:bg-pink-600 flex items-center gap-2">
                   <Plus className="w-4 h-4" />
-                  Add Reward
+                  Tambah Hadiah
                 </button>
               </div>
 
@@ -367,7 +371,7 @@ const LoyaltyProgram = () => {
                           </div>
                           <div>
                             <h4 className="font-semibold text-gray-800">{reward.name}</h4>
-                            <p className="text-sm text-gray-600">{reward.points} points</p>
+                            <p className="text-sm text-gray-600">{reward.points} poin</p>
                           </div>
                         </div>
                         <div className="flex gap-2">
@@ -381,10 +385,10 @@ const LoyaltyProgram = () => {
                       </div>
                       <div className="flex items-center justify-between">
                         <p className="text-sm text-gray-500">
-                          Redeemed: <span className="font-medium text-gray-700">{reward.redeemed}x</span>
+                          Ditukar: <span className="font-medium text-gray-700">{reward.redeemed}x</span>
                         </p>
                         <button className="text-pink-600 text-sm font-medium hover:text-pink-700">
-                          View Details →
+                          Lihat Detail →
                         </button>
                       </div>
                     </div>
@@ -396,16 +400,16 @@ const LoyaltyProgram = () => {
 
           {activeTab === 'activity' && (
             <div>
-              <h3 className="text-lg font-semibold text-gray-800 mb-4">Recent Points Activity</h3>
+              <h3 className="text-lg font-semibold text-gray-800 mb-4">Aktivitas Poin Terbaru</h3>
               <div className="overflow-x-auto">
                 <table className="w-full">
                   <thead className="bg-gray-50 border-b border-gray-200">
                     <tr>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Customer</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Action</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Points</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Tier</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Time</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Pelanggan</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Tindakan</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Poin</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Tingkat</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Waktu</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200">

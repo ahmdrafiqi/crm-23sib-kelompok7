@@ -130,33 +130,33 @@ const OrderManagement = () => {
     <main className="flex-1 p-6 bg-gray-50">
       {/* Header */}
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-gray-800">Order Management</h1>
-        <p className="text-gray-600">Track and manage all customer orders</p>
+        <h1 className="text-2xl font-bold text-gray-800">Manajemen Pesanan</h1>
+        <p className="text-gray-600">Lacak dan kelola semua pesanan pelanggan</p>
       </div>
 
       {/* Stats Overview */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
         <div className="bg-white rounded-lg p-4 shadow-sm border-l-4 border-pink-500">
-          <p className="text-sm text-gray-600">Total Orders</p>
+          <p className="text-sm text-gray-600">Total Pesanan</p>
           <p className="text-2xl font-bold text-gray-800">{stats.total}</p>
-          <p className="text-xs text-gray-500 mt-1">Today</p>
+          <p className="text-xs text-gray-500 mt-1">Hari ini</p>
         </div>
         <div className="bg-white rounded-lg p-4 shadow-sm border-l-4 border-yellow-500">
-          <p className="text-sm text-gray-600">Pending Orders</p>
+          <p className="text-sm text-gray-600">Tertunda</p>
           <p className="text-2xl font-bold text-yellow-600">{stats.pending}</p>
-          <p className="text-xs text-gray-500 mt-1">Need attention</p>
+          <p className="text-xs text-gray-500 mt-1">Butuh tindakan</p>
         </div>
         <div className="bg-white rounded-lg p-4 shadow-sm border-l-4 border-blue-500">
-          <p className="text-sm text-gray-600">Processing</p>
+          <p className="text-sm text-gray-600">Diproses</p>
           <p className="text-2xl font-bold text-blue-600">{stats.processing}</p>
-          <p className="text-xs text-gray-500 mt-1">In progress</p>
+          <p className="text-xs text-gray-500 mt-1">dalam progres</p>
         </div>
         <div className="bg-white rounded-lg p-4 shadow-sm border-l-4 border-green-500">
-          <p className="text-sm text-gray-600">Today's Revenue</p>
+          <p className="text-sm text-gray-600">Pendapatan hari ini</p>
           <p className="text-2xl font-bold text-green-600">
-            Rp {(stats.revenue / 1000000).toFixed(1)}M
+            Rp {(stats.revenue / 1000000).toFixed(1)}Jt
           </p>
-          <p className="text-xs text-gray-500 mt-1">+15% from yesterday</p>
+          <p className="text-xs text-gray-500 mt-1">+15% dari kemaren</p>
         </div>
       </div>
 
@@ -169,7 +169,7 @@ const OrderManagement = () => {
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
               <input
                 type="text"
-                placeholder="Search orders..."
+                placeholder="Cari Orderan..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
@@ -184,12 +184,12 @@ const OrderManagement = () => {
                 onChange={(e) => setStatusFilter(e.target.value)}
                 className="border border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-pink-500"
               >
-                <option value="all">All Status</option>
-                <option value="pending">Pending</option>
-                <option value="processing">Processing</option>
-                <option value="shipped">Shipped</option>
-                <option value="delivered">Delivered</option>
-                <option value="cancelled">Cancelled</option>
+                <option value="all">Semua Status</option>
+                <option value="pending">Tertunda</option>
+                <option value="processing">Diproses</option>
+                <option value="shipped">Dikirim</option>
+                <option value="delivered">Sudah Sampai</option>
+                <option value="cancelled">Dibatalkan</option>
               </select>
             </div>
 
@@ -201,10 +201,10 @@ const OrderManagement = () => {
                 onChange={(e) => setDateFilter(e.target.value)}
                 className="border border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-pink-500"
               >
-                <option value="all">All Time</option>
-                <option value="today">Today</option>
-                <option value="week">This Week</option>
-                <option value="month">This Month</option>
+                <option value="all">Sepanjang waktu</option>
+                <option value="today">Hari ini</option>
+                <option value="week">Minggu ini</option>
+                <option value="month">Bulan ini</option>
               </select>
             </div>
           </div>
@@ -212,7 +212,7 @@ const OrderManagement = () => {
           {/* Export Button */}
           <button className="bg-pink-500 text-white px-4 py-2 rounded-lg hover:bg-pink-600 transition-colors flex items-center gap-2">
             <Download className="w-4 h-4" />
-            Export Orders
+            Export data
           </button>
         </div>
       </div>
@@ -224,25 +224,25 @@ const OrderManagement = () => {
             <thead className="bg-gray-50 border-b border-gray-200">
               <tr>
                 <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Customer
+                  Pelanggan
                 </th>
                 <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Date
+                  tanggal daftar
                 </th>
                 <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Status
                 </th>
                 <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Items
+                  Item
                 </th>
                 <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Total
                 </th>
                 <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Payment
+                  Metode Pembayaran
                 </th>
                 <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Actions
+                  Aksi
                 </th>
               </tr>
             </thead>
@@ -322,13 +322,13 @@ const OrderManagement = () => {
         {/* Pagination */}
         <div className="px-6 py-4 border-t border-gray-200 flex items-center justify-between">
           <p className="text-sm text-gray-700">
-            Showing <span className="font-medium">1</span> to{" "}
-            <span className="font-medium">5</span> of{" "}
-            <span className="font-medium">3,567</span> results
+            Menampilkan <span className="font-medium">1</span> -{" "}
+            <span className="font-medium">5</span> dari{" "}
+            <span className="font-medium">3,567</span> data
           </p>
           <div className="flex gap-2">
             <button className="px-3 py-1 border border-gray-300 rounded-md text-sm hover:bg-gray-50">
-              Previous
+              Sebelumnya
             </button>
             <button className="px-3 py-1 bg-pink-500 text-white rounded-md text-sm">
               1
@@ -340,7 +340,7 @@ const OrderManagement = () => {
               3
             </button>
             <button className="px-3 py-1 border border-gray-300 rounded-md text-sm hover:bg-gray-50">
-              Next
+              Selanjutnya
             </button>
           </div>
         </div>

@@ -96,10 +96,10 @@ const AddCustomer = () => {
           className="flex items-center text-gray-600 hover:text-gray-800 mb-4"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
-          Back to Customers
+          Kembali ke halaman pelanggan
         </button>
-        <h1 className="text-2xl font-bold text-gray-800">Add New Customer</h1>
-        <p className="text-gray-600">Create a new customer profile</p>
+        <h1 className="text-2xl font-bold text-gray-800">pelanggan baru</h1>
+        <p className="text-gray-600">Buat profil pelanggan baru</p>
       </div>
 
       {/* Form */}
@@ -107,7 +107,7 @@ const AddCustomer = () => {
         <div className="bg-white rounded-xl shadow-sm p-6 mb-6">
           <h2 className="text-lg font-semibold text-gray-800 mb-4 flex items-center">
             <User className="w-5 h-5 mr-2 text-pink-500" />
-            Personal Information
+            Informasi Personal
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -134,7 +134,7 @@ const AddCustomer = () => {
             {/* Gender */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Gender
+                Jenis Kelamin
               </label>
               <select
                 name="gender"
@@ -142,9 +142,9 @@ const AddCustomer = () => {
                 onChange={handleChange}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
               >
-                <option value="">Choose gender</option>
-                <option value="Woman">Woman</option>
-                <option value="Man">Man</option>
+                <option value="">Pilih Jenis Kelamin</option>
+                <option value="Woman">Wanita</option>
+                <option value="Man">Pria</option>
               </select>
             </div>
 
@@ -171,7 +171,7 @@ const AddCustomer = () => {
         <div className="bg-white rounded-xl shadow-sm p-6 mb-6">
           <h2 className="text-lg font-semibold text-gray-800 mb-4 flex items-center">
             <MapPin className="w-5 h-5 mr-2 text-pink-500" />
-            Address Information
+            Alamat
           </h2>
 
           <div className="space-y-4">
@@ -181,7 +181,7 @@ const AddCustomer = () => {
               {/* City */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  City
+                  Kota
                 </label>
                 <input
                   type="text"
@@ -196,7 +196,7 @@ const AddCustomer = () => {
               {/* Postal Code */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Postal Code
+                  Kode Pos
                 </label>
                 <input
                   type="text"
@@ -218,14 +218,14 @@ const AddCustomer = () => {
             className="bg-pink-500 text-white px-6 py-2 rounded-lg hover:bg-pink-600 transition-colors flex items-center gap-2"
           >
             <Save className="w-4 h-4" />
-            Save Customer
+            Simpan Pelanggan
           </button>
           <button
             type="button"
             onClick={() => navigate("/admin/customers")}
             className="bg-gray-200 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-300 transition-colors"
           >
-            Cancel
+            Batalkan
           </button>
         </div>
       </form>
