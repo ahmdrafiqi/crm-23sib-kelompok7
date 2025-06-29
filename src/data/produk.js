@@ -30,20 +30,23 @@ const allProducts = [
     isNew: false,
     isBestseller: true,
   },
+
   {
     id: 3,
-    name: "The Body Shop British Rose Body Lotion",
-    brand: "THE BODY SHOP",
-    category: "bodycare",
-    price: 159000,
-    originalPrice: 199000,
-    discount: 20,
+    name: "Fenty Beauty Gloss Bomb Universal Lip Luminizer",
+    brand: "FENTY BEAUTY",
+    category: "makeup",
+    price: 285000,
+    originalPrice: 320000,
+    discount: 11,
     rating: 4.7,
-    reviews: 890,
-    image: "/src/assets/gambarUser/The Body Shop British Rose Body Lotion.jpeg",
+    reviews: 1950,
+    image:
+      "/src/assets/gambarUser/Fenty Beauty Gloss Bomb Universal Lip Luminizer.jpeg",
     isNew: false,
-    isBestseller: false,
+    isBestseller: true,
   },
+
   {
     id: 4,
     name: "COSRX Advanced Snail 96 Mucin Power Essence",
@@ -102,21 +105,6 @@ const allProducts = [
       "/src/assets/gambarUser/Bath & Body Works Japanese Cherry Blossom.jpeg",
     isNew: false,
     isBestseller: false,
-  },
-  {
-    id: 8,
-    name: "Fenty Beauty Gloss Bomb Universal Lip Luminizer",
-    brand: "FENTY BEAUTY",
-    category: "makeup",
-    price: 285000,
-    originalPrice: 320000,
-    discount: 11,
-    rating: 4.7,
-    reviews: 1950,
-    image:
-      "/src/assets/gambarUser/Fenty Beauty Gloss Bomb Universal Lip Luminizer.jpeg",
-    isNew: false,
-    isBestseller: true,
   },
 
   // 20 produk tambahan juga disesuaikan format dan category, image pathnya sesuai kamu punya
@@ -415,3 +403,24 @@ const categories = [
 ];
 
 export { allProducts, categories };
+
+// data/produk.js
+export const dummyReviews = [
+  {
+    name: "Dewi Lestari",
+    rating: 5,
+    comment:
+      "Produknya bagus banget, sesuai ekspektasi! Pengiriman juga cepat.",
+  },
+  {
+    name: "Adit Wicaksono",
+    rating: 4,
+    comment:
+      "Lumayan oke, tapi kemasannya sedikit penyok. Kualitas tetap bagus.",
+  },
+  {
+    name: "Rina Ayu",
+    rating: 5,
+    comment: "Top! Udah langganan dari dulu. Rekomended banget.",
+  },
+];
