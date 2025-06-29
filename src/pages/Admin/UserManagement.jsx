@@ -60,6 +60,9 @@ const UserManagement = () => {
                   Email
                 </th>
                 <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  No handphone
+                </th>
+                <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Role
                 </th>
                 <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -77,7 +80,6 @@ const UserManagement = () => {
                       </div>
                       <div className="ml-3">
                         <p className="text-sm font-medium text-gray-900">{users.username}</p>
-                        <p className="text-xs text-gray-500">ID: {users.id}</p>
                       </div>
                     </div>
                   </td>
@@ -86,6 +88,12 @@ const UserManagement = () => {
                       <Mail className="w-4 h-4 text-gray-400" /> {users.email}
                     </p>
                   </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <p className="text-sm text-gray-900 flex items-center gap-1">
+                      <Phone className="w-4 h-4 text-gray-400" /> {users.no_hp}
+                    </p>
+                  </td>
+                  
                   <td className="px-6 py-4 whitespace-nowrap">
                     <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-700">
                       <Shield className="w-4 h-4" /> {users.role}
