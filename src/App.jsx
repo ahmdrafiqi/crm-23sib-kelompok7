@@ -28,6 +28,7 @@ import UserManagement from "./pages/Admin/UserManagement";
 import AddProduct from "./pages/Admin/AddProduct";
 import ProductDetailPage from "./pages/HalamanUser/DetailProductPage";
 import OrderDetail from "./pages/Admin/OrdersDetail";
+import FeedbackPage from "./pages/HalamanUser/FeedbackPage";
 // Import other admin pages as you create them
 
 function App() {
@@ -45,6 +46,7 @@ function App() {
         <Route path="/cart" element={<CartPage />} />
         <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/profil" element={<ProfileUser />} />
+        <Route path="/feedback" element={<FeedbackPage />} />
       </Route>
 
       {/* Admin Routes with Layout */}
