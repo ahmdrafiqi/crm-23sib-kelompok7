@@ -50,7 +50,6 @@ const AdminSidebar = () => {
       hasSubmenu: true,
       submenu: [
         { label: 'All Customers', path: '/admin/customers' },
-        { label: 'Add New Customer', path: '/admin/customers/add' },
         { label: 'Customer Segmentation', path: '/admin/customers/segmentation' }
       ]
     },

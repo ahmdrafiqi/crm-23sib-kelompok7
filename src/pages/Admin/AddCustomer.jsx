@@ -1,93 +1,89 @@
-import React, { useState } from 'react';
-import { 
-  ArrowLeft,
-  User,
-  Mail,
-  Phone,
-  MapPin,
-  Calendar,
-  Tag,
-  Save,
-  X
-} from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { supabase } from "../../supabase";
+import { ArrowLeft, User, MapPin, Calendar, Save, X } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const AddCustomer = () => {
   const navigate = useNavigate();
-  
+
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    phone: '',
-    birthDate: '',
-    gender: '',
-    address: '',
-    city: '',
-    postalCode: '',
-    segment: 'New',
-    tags: [],
-    notes: '',
-    marketingConsent: true,
-    smsConsent: false
+    id_user: "",
+    ulang_tahun: "",
+    gender: "",
+    kota_asal: "",
+    kode_pos: "",
   });
 
+  const [users, setUsers] = useState([]);
   const [errors, setErrors] = useState({});
-  const [tagInput, setTagInput] = useState('');
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      const { data, error } = await supabase
+        .from("users")
+        .select("id_user, username");
+
+      if (error) {
+        console.error("Error fetching users:", error);
+      } else {
+        setUsers(data);
+      }
+    };
+
+    fetchUsers();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: type === 'checkbox' ? checked : value
+      [name]: type === "checkbox" ? checked : value,
     }));
-    // Clear error when user types
+
     if (errors[name]) {
-      setErrors(prev => ({ ...prev, [name]: '' }));
+      setErrors((prev) => ({ ...prev, [name]: "" }));
     }
-  };
-
-  const handleAddTag = (e) => {
-    if (e.key === 'Enter' && tagInput.trim()) {
-      e.preventDefault();
-      if (!formData.tags.includes(tagInput.trim())) {
-        setFormData(prev => ({
-          ...prev,
-          tags: [...prev.tags, tagInput.trim()]
-        }));
-      }
-      setTagInput('');
-    }
-  };
-
-  const handleRemoveTag = (tagToRemove) => {
-    setFormData(prev => ({
-      ...prev,
-      tags: prev.tags.filter(tag => tag !== tagToRemove)
-    }));
   };
 
   const validateForm = () => {
     const newErrors = {};
-    
-    if (!formData.firstName.trim()) newErrors.firstName = 'First name is required';
-    if (!formData.lastName.trim()) newErrors.lastName = 'Last name is required';
-    if (!formData.email.trim()) newErrors.email = 'Email is required';
-    else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = 'Email is invalid';
-    if (!formData.phone.trim()) newErrors.phone = 'Phone number is required';
-    else if (!/^[0-9-+().\s]+$/.test(formData.phone)) newErrors.phone = 'Phone number is invalid';
-    
+    if (!formData.id_user) newErrors.id_user = "User wajib dipilih";
+    if (!formData.gender) newErrors.gender = "Pilih gender terlebih dahulu";
+    if (!formData.ulang_tahun)
+      newErrors.ulang_tahun = "Tanggal lahir wajib diisi";
+    if (!formData.kota_asal) newErrors.kota_asal = "Kota asal wajib diisi";
+    if (!formData.kode_pos) newErrors.kode_pos = "Kode pos wajib diisi";
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (validateForm()) {
-      // Here you would typically send the data to your backend
-      console.log('Form submitted:', formData);
-      // Show success message and redirect
-      navigate('/admin/customers');
+      console.log("Submitting data:", formData);
+
+      const { data, error } = await supabase.from("pelanggan").insert([
+        {
+          id_user: formData.id_user,
+          gender: formData.gender,
+          ulang_tahun: formData.ulang_tahun,
+          kota_asal: formData.kota_asal,
+          kode_pos: formData.kode_pos,
+        },
+      ]);
+
+      console.log("DATA:", data);
+      console.log("ERROR:", error);
+
+      if (error) {
+        console.error("Error inserting customer:", error);
+        alert("Gagal menambahkan pelanggan.");
+      } else {
+        alert("Pelanggan berhasil ditambahkan!");
+        navigate("/admin/customers");
+      }
     }
   };
 
@@ -96,7 +92,7 @@ const AddCustomer = () => {
       {/* Header */}
       <div className="mb-6">
         <button
-          onClick={() => navigate('/admin/customers')}
+          onClick={() => navigate("/admin/customers")}
           className="flex items-center text-gray-600 hover:text-gray-800 mb-4"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
@@ -113,46 +109,26 @@ const AddCustomer = () => {
             <User className="w-5 h-5 mr-2 text-pink-500" />
             Personal Information
           </h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* First Name */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                First Name <span className="text-red-500">*</span>
-              </label>
-              <input
-                type="text"
-                name="firstName"
-                value={formData.firstName}
-                onChange={handleChange}
-                className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 ${
-                  errors.firstName ? 'border-red-500' : 'border-gray-300'
-                }`}
-                placeholder="Enter first name"
-              />
-              {errors.firstName && (
-                <p className="text-red-500 text-xs mt-1">{errors.firstName}</p>
-              )}
-            </div>
 
-            {/* Last Name */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Id User */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Last Name <span className="text-red-500">*</span>
+                Id User
               </label>
-              <input
-                type="text"
-                name="lastName"
-                value={formData.lastName}
+              <select
+                name="id_user"
+                value={formData.id_user}
                 onChange={handleChange}
-                className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 ${
-                  errors.lastName ? 'border-red-500' : 'border-gray-300'
-                }`}
-                placeholder="Enter last name"
-              />
-              {errors.lastName && (
-                <p className="text-red-500 text-xs mt-1">{errors.lastName}</p>
-              )}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
+              >
+                <option value="">-- Pilih User --</option>
+                {users.map((user) => (
+                  <option key={user.id_user} value={user.id_user}>
+                    {user.username}
+                  </option>
+                ))}
+              </select>
             </div>
 
             {/* Gender */}
@@ -166,85 +142,27 @@ const AddCustomer = () => {
                 onChange={handleChange}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
               >
-                <option value="">Select gender</option>
-                <option value="female">Female</option>
-                <option value="male">Male</option>
-                <option value="other">Other</option>
-                <option value="prefer_not_to_say">Prefer not to say</option>
+                <option value="">Choose gender</option>
+                <option value="Woman">Woman</option>
+                <option value="Man">Man</option>
               </select>
             </div>
 
             {/* Birth Date */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Birth Date
+                Tanggal Lahir
               </label>
               <div className="relative">
                 <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
                 <input
                   type="date"
-                  name="birthDate"
-                  value={formData.birthDate}
+                  name="ulang_tahun"
+                  value={formData.ulang_tahun}
                   onChange={handleChange}
                   className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
                 />
               </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Contact Information */}
-        <div className="bg-white rounded-xl shadow-sm p-6 mb-6">
-          <h2 className="text-lg font-semibold text-gray-800 mb-4 flex items-center">
-            <Mail className="w-5 h-5 mr-2 text-pink-500" />
-            Contact Information
-          </h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Email */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Email <span className="text-red-500">*</span>
-              </label>
-              <div className="relative">
-                <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  className={`w-full pl-10 pr-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 ${
-                    errors.email ? 'border-red-500' : 'border-gray-300'
-                  }`}
-                  placeholder="customer@email.com"
-                />
-              </div>
-              {errors.email && (
-                <p className="text-red-500 text-xs mt-1">{errors.email}</p>
-              )}
-            </div>
-
-            {/* Phone */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Phone <span className="text-red-500">*</span>
-              </label>
-              <div className="relative">
-                <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-                <input
-                  type="tel"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  className={`w-full pl-10 pr-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 ${
-                    errors.phone ? 'border-red-500' : 'border-gray-300'
-                  }`}
-                  placeholder="08xx-xxxx-xxxx"
-                />
-              </div>
-              {errors.phone && (
-                <p className="text-red-500 text-xs mt-1">{errors.phone}</p>
-              )}
             </div>
           </div>
         </div>
@@ -255,22 +173,9 @@ const AddCustomer = () => {
             <MapPin className="w-5 h-5 mr-2 text-pink-500" />
             Address Information
           </h2>
-          
+
           <div className="space-y-4">
             {/* Address */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Address
-              </label>
-              <textarea
-                name="address"
-                value={formData.address}
-                onChange={handleChange}
-                rows="3"
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
-                placeholder="Street address"
-              />
-            </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* City */}
@@ -280,8 +185,8 @@ const AddCustomer = () => {
                 </label>
                 <input
                   type="text"
-                  name="city"
-                  value={formData.city}
+                  name="kota_asal"
+                  value={formData.kota_asal}
                   onChange={handleChange}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
                   placeholder="City"
@@ -295,112 +200,13 @@ const AddCustomer = () => {
                 </label>
                 <input
                   type="text"
-                  name="postalCode"
-                  value={formData.postalCode}
+                  name="kode_pos"
+                  value={formData.kode_pos}
                   onChange={handleChange}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
                   placeholder="12345"
                 />
               </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Customer Preferences */}
-        <div className="bg-white rounded-xl shadow-sm p-6 mb-6">
-          <h2 className="text-lg font-semibold text-gray-800 mb-4 flex items-center">
-            <Tag className="w-5 h-5 mr-2 text-pink-500" />
-            Customer Preferences
-          </h2>
-          
-          <div className="space-y-4">
-            {/* Segment */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Customer Segment
-              </label>
-              <select
-                name="segment"
-                value={formData.segment}
-                onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
-              >
-                <option value="New">New Customer</option>
-                <option value="Loyal">Loyal Customer</option>
-                <option value="VIP">VIP Customer</option>
-                <option value="Dormant">Dormant Customer</option>
-              </select>
-            </div>
-
-            {/* Tags */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Tags
-              </label>
-              <div className="flex flex-wrap gap-2 mb-2">
-                {formData.tags.map((tag, index) => (
-                  <span
-                    key={index}
-                    className="px-3 py-1 bg-pink-100 text-pink-700 rounded-full text-sm flex items-center"
-                  >
-                    {tag}
-                    <button
-                      type="button"
-                      onClick={() => handleRemoveTag(tag)}
-                      className="ml-2 text-pink-500 hover:text-pink-700"
-                    >
-                      <X className="w-3 h-3" />
-                    </button>
-                  </span>
-                ))}
-              </div>
-              <input
-                type="text"
-                value={tagInput}
-                onChange={(e) => setTagInput(e.target.value)}
-                onKeyDown={handleAddTag}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
-                placeholder="Type a tag and press Enter"
-              />
-            </div>
-
-            {/* Notes */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Notes
-              </label>
-              <textarea
-                name="notes"
-                value={formData.notes}
-                onChange={handleChange}
-                rows="3"
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
-                placeholder="Add any additional notes about this customer"
-              />
-            </div>
-
-            {/* Consent */}
-            <div className="space-y-3">
-              <label className="flex items-center">
-                <input
-                  type="checkbox"
-                  name="marketingConsent"
-                  checked={formData.marketingConsent}
-                  onChange={handleChange}
-                  className="mr-2 text-pink-500 focus:ring-pink-500"
-                />
-                <span className="text-sm text-gray-700">Email marketing consent</span>
-              </label>
-              <label className="flex items-center">
-                <input
-                  type="checkbox"
-                  name="smsConsent"
-                  checked={formData.smsConsent}
-                  onChange={handleChange}
-                  className="mr-2 text-pink-500 focus:ring-pink-500"
-                />
-                <span className="text-sm text-gray-700">SMS marketing consent</span>
-              </label>
             </div>
           </div>
         </div>
@@ -416,7 +222,7 @@ const AddCustomer = () => {
           </button>
           <button
             type="button"
-            onClick={() => navigate('/admin/customers')}
+            onClick={() => navigate("/admin/customers")}
             className="bg-gray-200 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-300 transition-colors"
           >
             Cancel
