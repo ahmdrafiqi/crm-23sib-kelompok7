@@ -26,6 +26,25 @@ const UserManagement = () => {
       users.email?.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  const handleDelete = async (id_user) => {
+  const confirmDelete = confirm("Yakin ingin menghapus user ini?");
+  if (!confirmDelete) return;
+
+  const { error } = await supabase
+    .from("users")
+    .delete()
+    .eq("id_user", id_user);
+
+  if (error) {
+    console.error("Gagal menghapus user:", error.message);
+    alert("Terjadi kesalahan saat menghapus user.");
+  } else {
+    alert("User berhasil dihapus.");
+    // Perbarui state users di tampilan
+    setUsers((prev) => prev.filter((u) => u.id_user !== id_user));
+  }
+};
+
   return (
     <main className="flex-1 p-6 bg-gray-50">
       <div className="mb-6">
@@ -101,13 +120,12 @@ const UserManagement = () => {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex gap-2">
-                      <button className="text-blue-500 hover:text-blue-700">
-                        <Eye className="w-4 h-4" />
-                      </button>
                       <button className="text-yellow-500 hover:text-yellow-700">
                         <Edit className="w-4 h-4" />
                       </button>
-                      <button className="text-red-500 hover:text-red-700">
+                      <button
+                      onClick={() => handleDelete(users.id_user)} 
+                      className="text-red-500 hover:text-red-700">
                         <Trash2 className="w-4 h-4" />
                       </button>
                     </div>

@@ -27,6 +27,7 @@ import DataManagementBPMN from "./pages/Admin/BPMN";
 import UserManagement from "./pages/Admin/UserManagement";
 import AddProduct from "./pages/Admin/AddProduct";
 import ProductDetailPage from "./pages/HalamanUser/DetailProductPage";
+import OrderDetail from "./pages/Admin/OrdersDetail";
 // Import other admin pages as you create them
 
 function App() {
@@ -63,6 +64,7 @@ function App() {
 
         {/* Sales Force */}
         <Route path="orders" element={<OrderManagement />} />
+        <Route path="/admin/orders/:id_transaksi/detail" element={<OrderDetail />} />
         <Route path="products" element={<ProductManagement />} />
         <Route path="products/add" element={<AddProduct />} />
         <Route path="sales-reports" element={<SalesReports />} />

@@ -19,7 +19,6 @@ const CustomerManagement = () => {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
   const [filterSegment, setFilterSegment] = useState("all");
-  
 
   const segmentColors = {
     Bronze: "bg-purple-100 text-purple-700",
@@ -106,6 +105,27 @@ const CustomerManagement = () => {
 
     return matchesSearch && matchesFilter;
   });
+
+  const handleDelete = async (id) => {
+    const confirmDelete = window.confirm(
+      "Yakin ingin menghapus pelanggan ini?"
+    );
+    if (!confirmDelete) return;
+
+    const { error } = await supabase
+      .from("pelanggan")
+      .delete()
+      .eq("id_pelanggan", id);
+
+    if (error) {
+      console.error("Gagal menghapus pelanggan:", error.message); // tampilkan pesan error
+      alert("Terjadi kesalahan saat menghapus pelanggan: " + error.message);
+    } else {
+      alert("Pelanggan berhasil dihapus.");
+      // Refresh data
+      setCustomers((prev) => prev.filter((c) => c.id !== id));
+    }
+  };
 
   return (
     <main className="flex-1 p-6 bg-gray-50">
@@ -290,8 +310,8 @@ const CustomerManagement = () => {
                       <button className="text-gray-600 hover:text-gray-800 transition-colors">
                         <Edit className="w-4 h-4" />
                       </button>
-                      <button className="text-red-600 hover:text-red-800 transition-colors">
-                        <Trash2 className="w-4 h-4" />
+                      <button onClick={() => handleDelete(pelanggan.id)}>
+                        <Trash2 className="w-4 h-4 text-red-600" />
                       </button>
                     </div>
                   </td>

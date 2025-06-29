@@ -78,22 +78,23 @@ const ProductManagement = () => {
     navigate(`/admin/products/edit/${id}`);
   };
 
-  const handleDelete = async (id) => {
-    const confirmDelete = confirm(
-      "Are you sure you want to delete this product?"
-    );
-    if (confirmDelete) {
-      const { error } = await supabase
-        .from("produk")
-        .delete()
-        .eq("id_produk", id);
-      if (error) {
-        console.error("Gagal hapus produk:", error.message);
-      } else {
-        setProducts((prev) => prev.filter((p) => p.id_produk !== id));
-      }
+const handleDelete = async (id) => {
+  const confirmDelete = confirm("Yakin ingin menghapus pelanggan ini?");
+  if (confirmDelete) {
+    const { error } = await supabase
+      .from("pelanggan")
+      .delete()
+      .eq("id_pelanggan", id);
+
+    if (error) {
+      console.error("Gagal hapus pelanggan:", error.message);
+      alert("Terjadi kesalahan saat menghapus pelanggan.");
+    } else {
+      setCustomers((prev) => prev.filter((c) => c.id !== id));
+      alert("Pelanggan berhasil dihapus.");
     }
-  };
+  }
+};
 
   const filteredProducts = products.filter((product) => {
     const matchesSearch =
