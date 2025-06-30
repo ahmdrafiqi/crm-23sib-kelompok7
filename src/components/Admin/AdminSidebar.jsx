@@ -76,34 +76,34 @@ const AdminSidebar = () => {
         { label: 'Komunikasi', path: '/admin/communications' }
       ]
     },
-    {
-      key: 'service',
-      label: 'Layanan Pelanggan',
-      icon: HeadphonesIcon,
-      hasSubmenu: true,
-      submenu: [
-        { label: 'Tiket Dukungan', path: '/admin/tickets' },
-        { label: 'Basis Pengetahuan', path: '/admin/knowledge' }
-      ]
-    },
-    {
-      key: 'analytics',
-      label: 'Analitik & Laporan',
-      icon: PieChart,
-      hasSubmenu: true,
-      submenu: [
-        { label: 'Analitik Pelanggan', path: '/admin/analytics/customers' },
-        { label: 'Analitik Penjualan', path: '/admin/analytics/sales' },
-        { label: 'Analitik Kampanye', path: '/admin/analytics/campaigns' }
-      ]
-    },
-    {
-      key: 'settings',
-      label: 'Pengaturan',
-      icon: Settings,
-      path: '/admin/settings',
-      hasSubmenu: false
-    }
+    // {
+    //   key: 'service',
+    //   label: 'Layanan Pelanggan',
+    //   icon: HeadphonesIcon,
+    //   hasSubmenu: true,
+    //   submenu: [
+    //     { label: 'Tiket Dukungan', path: '/admin/tickets' },
+    //     { label: 'Basis Pengetahuan', path: '/admin/knowledge' }
+    //   ]
+    // },
+    // {
+    //   key: 'analytics',
+    //   label: 'Analitik & Laporan',
+    //   icon: PieChart,
+    //   hasSubmenu: true,
+    //   submenu: [
+    //     { label: 'Analitik Pelanggan', path: '/admin/analytics/customers' },
+    //     { label: 'Analitik Penjualan', path: '/admin/analytics/sales' },
+    //     { label: 'Analitik Kampanye', path: '/admin/analytics/campaigns' }
+    //   ]
+    // },
+    // {
+    //   key: 'settings',
+    //   label: 'Pengaturan',
+    //   icon: Settings,
+    //   path: '/admin/settings',
+    //   hasSubmenu: false
+    // }
   ];
 
   return (

@@ -1,4 +1,5 @@
 import { Routes, Route } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 // User Pages
 import ProfileUser from "./pages/HalamanUser/ProfileUser";
@@ -51,6 +52,10 @@ function App() {
 
       {/* Admin Routes with Layout */}
       <Route path="/admin" element={<AdminLayout />}>
+        <Route
+          path="/admin"
+          element={<Navigate to="/admin/dashboard" replace />}
+        />
         <Route path="dashboard" element={<DashboardPage />} />
 
         {/* Customer Management */}
@@ -66,7 +71,10 @@ function App() {
 
         {/* Sales Force */}
         <Route path="orders" element={<OrderManagement />} />
-        <Route path="/admin/orders/:id_transaksi/detail" element={<OrderDetail />} />
+        <Route
+          path="/admin/orders/:id_transaksi/detail"
+          element={<OrderDetail />}
+        />
         <Route path="products" element={<ProductManagement />} />
         <Route path="products/add" element={<AddProduct />} />
         <Route path="sales-reports" element={<SalesReports />} />
