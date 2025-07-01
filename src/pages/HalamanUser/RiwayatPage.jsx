@@ -17,7 +17,7 @@ const RiwayatPage = () => {
       discount: 18,
       rating: 4.8,
       reviews: 1250,
-      image: '☀️',
+      image:"/src/assets/gambarUser/Urban Decay Naked Heat Eyeshadow Palette.jpeg",
       category: 'Skincare',
       brand: 'SKINTIFIC'
     },
