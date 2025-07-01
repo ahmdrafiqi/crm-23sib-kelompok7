@@ -62,8 +62,8 @@ const Footer = () => {
           <div>
             <h5 className="font-semibold text-gray-900 mb-3">About Us</h5>
             <ul className="space-y-2 text-sm text-gray-600">
-              <li><a href="#" className="hover:text-pink-500">About us</a></li>
-              <li><a href="#" className="hover:text-pink-500">Contact us</a></li>
+              <li><a href="https://www.instagram.com/missglam_id?igsh=M2p4cmZkN2c1YXJy" className="hover:text-pink-500" target="_blank" rel="noopener noreferrer">About us</a></li>
+              <li><a href="https://linktr.ee/missglam.id?fbclid=PAQ0xDSwLQHY1leHRuA2FlbQIxMQABp03r-3OxgpmFE_6Ame-lvKyWgd8K3R-Sn8pwdjRq0OgUmNhNZ1POON2-3J2S_aem_BSgqkvcldcLucJa-8P7R3g" className="hover:text-pink-500" target="_blank" rel="noopener noreferrer">Contact us</a></li>
               <li><a href="#" className="hover:text-pink-500">About team</a></li>
               <li><a href="#" className="hover:text-pink-500">Customer Support</a></li>
             </ul>
