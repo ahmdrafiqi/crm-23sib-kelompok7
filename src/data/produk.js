@@ -101,7 +101,7 @@ const allProducts = [
     rating: 4.6,
     reviews: 750,
     image:
-      "/src/assets/gambarUser/Bath & Body Works Japanese Cherry Blossom.jpeg",
+      "assets/gambarUser/Bath_&_Body_Works_Japanese_Cherry_Blossom.jpeg",
     isNew: false,
     isBestseller: false,
   },
