@@ -46,7 +46,7 @@ const Header = ({ activeTab = "home" }) => {
             <div className="flex items-center flex-1">
               <div className="flex items-center mr-8">
                 <img
-                  src="/src/assets/gambarUser/logo-missglam.png"
+                  src="assets/gambarUser/logo-missglam.png"
                   alt="Miss Glam Logo"
                   className="h-13 w-auto cursor-pointer"
                   onClick={() => navigate("/home")}
@@ -156,7 +156,6 @@ const Header = ({ activeTab = "home" }) => {
                         >
                           <span>Riwayat</span>
                         </NavLink>
-                        
                       </div>
 
                       {/* Logout */}
