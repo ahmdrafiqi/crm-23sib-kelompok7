@@ -111,7 +111,7 @@ const Header = ({ activeTab = "home" }) => {
                         {/* Foto Profil Bulat Tinggi Sama dengan Konten */}
                         <div className="w-16 h-16 rounded-full overflow-hidden border border-gray-300">
                           <img
-                            src="/src/assets/gambarUser/user.jpg" // ganti sesuai path kamu
+                            src="assets/gambarUser/user.jpg" // ganti sesuai path kamu
                             alt="User Avatar"
                             className="w-full h-full object-cover"
                           />
