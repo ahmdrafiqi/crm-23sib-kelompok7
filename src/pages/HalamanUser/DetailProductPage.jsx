@@ -27,7 +27,7 @@ const ProductDetailPage = () => {
         <div className="w-full flex justify-center">
           <div className="max-w-sm w-full border rounded-xl overflow-hidden shadow-sm">
             <img
-              src={`/assets/gambarUser/${product.image}`}
+              src={`/${product.image}`}
               alt={product.name}
               className="w-full h-72 object-contain p-6 bg-white"
             />
