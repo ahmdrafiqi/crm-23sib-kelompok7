@@ -10,7 +10,7 @@ const allProducts = [
     discount: 25,
     rating: 4.8,
     reviews: 1200,
-    image: "/gambarUser/SKINTIFIC_Aqua_Light_Daily_Sunscreen_SPF_35.jpeg",
+    image: "assets/gambarUser/SKINTIFIC_Aqua_Light_Daily_Sunscreen_SPF_35.jpeg",
     isNew: false,
     isBestseller: true,
   },
